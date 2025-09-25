@@ -9,6 +9,16 @@ string? stringConnection = builder.Configuration.GetConnectionString("DefaultCon
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+.AddCookie(options =>
+{
+  options.LoginPath = "/login";
+  options.ExpireTimeSpan = TimeSpan.FromDays(20);
+  options.SlidingExpiration = true;
+  options.Cookie.HttpOnly = true;
+  options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+});
+
 
 if (stringConnection != null)
 {
