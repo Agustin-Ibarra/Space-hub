@@ -1,0 +1,7 @@
+bin/
+obj/
+helps_files/
+lib/
+launchSettings.json
+diagram.txt
+appsettings.Development.json
