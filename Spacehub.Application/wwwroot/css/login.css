@@ -1,8 +1,8 @@
-header {
-  background-color: #131b25;
+header{
   position: relative;
-  width: 100%;
+  background-color: #131b25;
 }
+
 body {
   background-color: #e2dbbb38;
 }
@@ -15,7 +15,6 @@ body {
   margin-top: 3rem;
   padding: 4rem 1rem;
   background-color: #1d1d1d;
-  /* border-radius: 15px; */
 }
 
 .form-img {
@@ -39,9 +38,8 @@ body {
 form {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  gap: 2rem;
   width: 450px;
-  min-height: 400px;
   padding: 2rem;
   border-radius: 10px;
   border: #ffffff34 2px solid;

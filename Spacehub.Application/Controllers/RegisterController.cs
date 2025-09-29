@@ -1,18 +1,26 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SpaceHub.Application.Data;
 using SpaceHub.Application.Dtos;
+using SpaceHub.Application.Models;
 using SpaceHub.Application.Repository;
 
-namespace SpaceHub.Application.Models;
+namespace SpaceHub.Application.Controllers;
 
-public class RegisterContorller : Controller
+public class RegisterController : Controller
 {
   private readonly IUserRepository _userRepository;
-  public RegisterContorller(IUserRepository userRepository)
+  public RegisterController(IUserRepository userRepository)
   {
     _userRepository = userRepository;
   }
+
+  [HttpGet]
+  [Route("/register")]
+  public IActionResult Register()
+  {
+    return View();
+  }
+
   [HttpPost]
   [Route("/api/register")]
   public async Task<IActionResult> ApiRegister([FromBody] RegisterDto dto)
