@@ -15,6 +15,13 @@ public class LoginController : Controller
     _userRepository = userRepository;
   }
 
+  [HttpGet]
+  [Route("/login")]
+  public IActionResult Login()
+  {
+    return View();
+  }
+
   [HttpPost]
   [Route("/api/login")]
   public async Task<IActionResult> ApiLogin([FromBody] LoginDto dto)

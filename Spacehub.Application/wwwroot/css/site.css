@@ -8,23 +8,12 @@
 
 /* FONTS STYLES */
 
-
 .raleway-text {
   font-family: "Raleway", sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
 }
-
-.roboto-test {
-  font-family: "Roboto", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: normal;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 200;
-}
-
 
 .roboto-content-text {
   font-family: "Roboto", sans-serif;
