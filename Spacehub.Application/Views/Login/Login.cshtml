@@ -1,19 +1,30 @@
 @{
   ViewData["Title"] = "Space Hub | Inicio de sesión";
+  ViewData["link1"] = "Pagina Principal";
+  ViewData["path1"] = "/";
+  ViewData["icon1"] = "home";
+  ViewData["link2"] = "Noticias Espaciales";
+  ViewData["path2"] = "/posts";
+  ViewData["icon2"] = "rocket_launch";
+  ViewData["link3"] = "Tienda Galactica";
+  ViewData["path3"] = "/items";
+  ViewData["icon3"] = "shopping_bag";
 }
 <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
 <section>
   <section class="main">
     <section class="form-img">
       <p class="title roboto-content-text">Tu viaje por el cosmos continua aquí</p>
-      <p class="subtitle roboto-content-text">Inicia sesión y desbloquea una experiencia estelar hecha a tu medida, con acceso a contenidos únicos y un universo de conocimiento a tu alcance.</p>
+      <p class="subtitle roboto-content-text">Inicia sesión y desbloquea una experiencia estelar hecha a tu medida, con
+        acceso a contenidos únicos y un universo de conocimiento a tu alcance.</p>
     </section>
     <form action="">
       <p class="form-title">Iniciar sesión</p>
       <input type="text" placeholder="Nombre de usuario">
       <input type="password" placeholder="Contraseña">
       <button>Iniciar sesion</button>
-      <p class="redirect-form-text">Si no tienes una cuenta registrate gratis <a href="" class="redirect-link">aqui</a></p>
+      <p class="redirect-form-text">Si no tienes una cuenta registrate gratis <a href="" class="redirect-link">aqui</a>
+      </p>
     </form>
   </section>
 </section>
