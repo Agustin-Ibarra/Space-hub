@@ -6,7 +6,14 @@ public class ItemController : Controller
 {
   [HttpGet]
   [Route("/items")]
-  public IActionResult Item(){
+  public IActionResult Item() {
+    return View();
+  }
+
+  [HttpGet]
+  [Route("/items/details")]
+  public IActionResult ItemDetail()
+  {
     return View();
   }
 }

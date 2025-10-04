@@ -1,0 +1,36 @@
+@{
+  ViewData["Title"] = "Space Hub | Tienda espacial";
+  ViewData["link1"] = "Pagina principal";
+  ViewData["path1"] = "/";
+  ViewData["icon1"] = "home";
+  ViewData["link2"] = "Tienda Espacial";
+  ViewData["path2"] = "/items";
+  ViewData["icon2"] = "shopping_bag";
+  ViewData["link3"] = "Mi Carrito";
+  ViewData["path3"] = "/cart";
+  ViewData["icon3"] = "shopping_cart";
+}
+
+<link rel="stylesheet" href="~/css/content.css">
+
+<section class="main">
+  <section class="content-container">
+    <article class="item-detail-container">
+      <div class="item-detail-img-div">
+        <img src="~/images/items/taza-blanca.png" alt="">
+      </div>
+      <div class="item-detail-data-container">
+        <p class="item-detail-name">Taza spacehub blanca</p>
+        <p class="item-detail-description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae voluptate vel libero eos non facilis et, suscipit error ea laborum neque doloremque quisquam veritatis odit similique velit dolor aliquam ipsa!</p>
+        <p class="item-detail-price">$ 23000.00</p>
+        <p class="item-detail-stock">Stock disponible 27</p>
+        <div class="item-detail-options-div">
+          <button class="item-detail-options-btn add-btn">+</button>
+          <p class="item-detail-options-quantity">1</p>
+          <button class="item-detail-options-btn less-btn">-</button>
+        </div>
+        <button class="item-detail-add-cart-btn">Agregar al carrito<span class="material-symbols-outlined">shopping_cart</span></button>
+      </div>
+    </article>
+  </section>
+</section>
