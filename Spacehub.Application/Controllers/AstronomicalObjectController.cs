@@ -11,4 +11,11 @@ public class AstronomicalObjectController : Controller
   {
     return View();
   }
+
+  [HttpGet]
+  [Route("/astronomical_objects/info")]
+  public IActionResult AstronomicalObjectInfo()
+  {
+    return View();
+  }
 }
