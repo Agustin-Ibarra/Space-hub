@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Spacehub.Application.Repository;
 using SpaceHub.Application.Data;
 using SpaceHub.Application.Repository;
 
@@ -24,6 +25,7 @@ if (stringConnection != null)
 {
   builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(stringConnection));
   builder.Services.AddScoped<IUserRepository, UserRepository>();
+  builder.Services.AddScoped<IAstronomicalObjectRepository, AstronomicalObjectRepository>();
 }
 else
 {
