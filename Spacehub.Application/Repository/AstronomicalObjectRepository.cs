@@ -7,6 +7,7 @@ namespace Spacehub.Application.Repository;
 public interface IAstronomicalObjectRepository
 {
   Task<List<AstronomicalObjectDto>> GetAstronomicalObjectList(int offset);
+  Task<AstronomicalObjectDto?> GetAstronomicalObject(int idObject);
 }
 
 public class AstronomicalObjectRepository : IAstronomicalObjectRepository
@@ -20,7 +21,7 @@ public class AstronomicalObjectRepository : IAstronomicalObjectRepository
   {
     return await _AppDbContext.AstronomicalObjects
     .OrderBy(astronomical => astronomical.id_object)
-    .Include( astronomical => astronomical.CategoryFk)
+    .Include(astronomical => astronomical.CategoryFk)
     .Select(astronomical => new AstronomicalObjectDto
     {
       ImagePath = astronomical.path_image,
@@ -31,5 +32,21 @@ public class AstronomicalObjectRepository : IAstronomicalObjectRepository
     .Skip(offset)
     .Take(10)
     .ToListAsync();
+  }
+  
+  public async Task<AstronomicalObjectDto?> GetAstronomicalObject(int idObject)
+  {
+    return await _AppDbContext.AstronomicalObjects
+    .OrderBy(astronomical => astronomical.id_object)
+    .Include(astronomical => astronomical.CategoryFk)
+    .Where(astronomical => astronomical.id_object == idObject)
+    .Select(astronomical => new AstronomicalObjectDto
+    {
+      Category = astronomical.CategoryFk != null ? astronomical.CategoryFk.category : "Sin categoria",
+      ImagePath = astronomical.path_image,
+      InformationText = astronomical.text_content,
+      Title = astronomical.title
+    })
+    .FirstOrDefaultAsync();
   }
 }

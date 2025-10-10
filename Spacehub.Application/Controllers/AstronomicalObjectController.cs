@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Spacehub.Application.Repository;
-using SpaceHub.Application.Data;
 
 namespace SpaceHub.Application.Controllers;
 
@@ -38,7 +37,22 @@ public class AstronomicalObjectController : Controller
     }
     catch (Exception)
     {
-      return StatusCode(503, new {error = "Ocurrio un error en la base de datos"});
+      return StatusCode(503, new { error = "Ocurrio un error en la base de datos"});
+    }
+  }
+
+  [HttpGet]
+  [Route("/astronomical_objects/detail/api/{idObject}")]
+  public async Task<IActionResult> AstronomicalObjectDeatilApi(int idObject)
+  {
+    try
+    {
+      var astronomicalObject = await _IAstronomicalObjectRepository.GetAstronomicalObject(idObject);
+      return Ok(astronomicalObject);
+    }
+    catch (Exception)
+    {
+      return StatusCode(503, new { error = "Ocurrio un error en la base de datos"});
     }
   }
 }
