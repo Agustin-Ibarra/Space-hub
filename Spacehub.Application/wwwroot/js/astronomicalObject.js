@@ -14,7 +14,6 @@ const generateObjects = function () {
         const $image = document.createElement("img");
         const $textDiv = document.createElement("div");
         const $title = document.createElement("p");
-        const $textContent = document.createElement("p");
         const $link = document.createElement("a");
         $astronomicalObjectList.appendChild($li);
         $li.setAttribute("class", "content-list-item");
@@ -23,19 +22,16 @@ const generateObjects = function () {
         $image.setAttribute("class", "content-list-item-img");
         $textDiv.setAttribute("class", "content-list-item-text-div");
         $title.setAttribute("class", "content-title");
-        $textContent.setAttribute("class", "content-text");
         $link.setAttribute("class", "article-content-link");
-        $link.setAttribute("href", "");
+        $link.setAttribute("href", "/astronomical_objects/info");
         $li.appendChild($imageDiv);
         $li.appendChild($textDiv);
         $imageDiv.appendChild($image);
         $textDiv.appendChild($title);
-        $textDiv.appendChild($textContent);
         $textDiv.appendChild($link);
         $image.setAttribute("src", object.imagePath);
         $title.textContent = object.title;
-        $textContent.textContent = object.informationText;
-        $link.textContent = "Ver Mas";
+        $link.textContent = "Ver articulo completo";
       })
       offset += 10;
     }
