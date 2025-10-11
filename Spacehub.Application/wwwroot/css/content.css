@@ -34,24 +34,6 @@ h3 {
   width: max-content;
 }
 
-.category-list {
-  color: #131b25;
-  font-weight: 600;
-  padding: 8px;
-  background-color: #ececec;
-  width: 300px;
-  text-align: center;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all .4s;
-}
-
-.category-list:hover {
-  background-color: #dfdfdf;
-}
-
 .content-list {
   list-style: none;
   display: grid;
@@ -377,6 +359,15 @@ h3 {
 
 .object-info-img-div img {
   width: 100%;
+}
+
+.category{
+  border: #dbdbdb 2px solid;
+  border-radius: 5px;
+  color: #7e7d74;
+  padding: 5px;
+  width: max-content;
+  background-color: #f8f8f8;
 }
 
 img {
