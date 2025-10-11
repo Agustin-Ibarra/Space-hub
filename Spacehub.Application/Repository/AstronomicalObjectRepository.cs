@@ -8,6 +8,7 @@ public interface IAstronomicalObjectRepository
 {
   Task<List<AstronomicalObjectDto>> GetAstronomicalObjectList(int offset);
   Task<AstronomicalObjectDetail?> GetAstronomicalObject(int idObject);
+  Task<List<AstronomicalObjectDto>> GetAstronomicalObjectSuggestion();
 }
 
 public class AstronomicalObjectRepository : IAstronomicalObjectRepository
@@ -33,7 +34,7 @@ public class AstronomicalObjectRepository : IAstronomicalObjectRepository
     .Take(10)
     .ToListAsync();
   }
-  
+
   public async Task<AstronomicalObjectDetail?> GetAstronomicalObject(int idObject)
   {
     return await _AppDbContext.AstronomicalObjects
@@ -48,5 +49,22 @@ public class AstronomicalObjectRepository : IAstronomicalObjectRepository
       Title = astronomical.title
     })
     .FirstOrDefaultAsync();
+  }
+
+  public async Task<List<AstronomicalObjectDto>> GetAstronomicalObjectSuggestion()
+  {
+    return await _AppDbContext.AstronomicalObjects
+    .OrderBy(astronomical => astronomical.id_object)
+    .OrderDescending()
+    .Include(astronomical => astronomical.CategoryFk)
+    .Select(astronomical => new AstronomicalObjectDto
+    {
+      Category = astronomical.CategoryFk != null ? astronomical.CategoryFk.category : "Sin categoria",
+      ImagePath = astronomical.path_image,
+      Title = astronomical.title,
+      Id = astronomical.id_object
+    })
+    .Take(3)
+    .ToListAsync();
   }
 }

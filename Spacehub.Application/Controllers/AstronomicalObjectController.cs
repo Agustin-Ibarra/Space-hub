@@ -55,4 +55,19 @@ public class AstronomicalObjectController : Controller
       return StatusCode(503, new { error = "Ocurrio un error en la base de datos"});
     }
   }
+
+  [HttpGet]
+  [Route("/astronomical_objects/suggestion")]
+  public async Task<IActionResult> AstronomicalObjectsSuggestion()
+  {
+    try
+    {
+      var astronomicalObjest = await _IAstronomicalObjectRepository.GetAstronomicalObjectSuggestion();
+      return Ok(astronomicalObjest);
+    }
+    catch (Exception)
+    {
+      return StatusCode(503, new { error = "Ocurrio un error en la base de datos" });
+    }
+  }
 }
