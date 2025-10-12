@@ -8,7 +8,7 @@ fetch(`/astronomical_objects/detail/api/${sessionStorage.getItem("id")}`)
     const $image = document.querySelector(".image-astronomical-object-info");
     const $textContent = document.querySelector(".object-info-text");
     $title.textContent = astronomicalObject.title;
-    $category.textContent = `Categoria: ${astronomicalObject.category}`;
+    $category.textContent = astronomicalObject.category;
     $image.setAttribute("src",astronomicalObject.imagePath);
     $textContent.innerHTML = textContent;
   }
@@ -20,10 +20,10 @@ fetch(`/astronomical_objects/detail/api/${sessionStorage.getItem("id")}`)
 fetch("/astronomical_objects/suggestion")
 .then(async(response)=>{
   if(response.status === 200){
-    const suggestion = await response.json();
-    console.log(suggestion);
+    const suggestions = await response.json();
+    console.log(suggestions);
     const $list = document.querySelector(".object-sub-list");
-    suggestion.forEach(element => {
+    suggestions.forEach(suggestion => {
       const $item = document.createElement("li");
       const $divImage = document.createElement("div");
       const $image = document.createElement("img");
@@ -36,11 +36,12 @@ fetch("/astronomical_objects/suggestion")
       $item.appendChild($link);
       $divImage.setAttribute("class","object-sub-list-img-div");
       $divImage.appendChild($image);
-      $image.setAttribute("src",element.imagePath);
+      $image.setAttribute("src",suggestion.imagePath);
       $title.setAttribute("class","object-sub-list-title");
-      $title.textContent = element.title
+      $title.textContent = suggestion.title
       $link.setAttribute("class","object-sub-list-link");
-      $link.setAttribute("src",element.id);
+      $link.setAttribute("href","/astronomical_objects/info")
+      $link.setAttribute("id",suggestion.id);
       $link.textContent = "Ver mas";
     });
   }
