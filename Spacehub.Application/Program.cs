@@ -26,6 +26,7 @@ if (stringConnection != null)
   builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(stringConnection));
   builder.Services.AddScoped<IUserRepository, UserRepository>();
   builder.Services.AddScoped<IAstronomicalObjectRepository, AstronomicalObjectRepository>();
+  builder.Services.AddScoped<IpostRepository, PostRepository>();
 }
 else
 {
