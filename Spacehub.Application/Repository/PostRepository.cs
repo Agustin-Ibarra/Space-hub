@@ -7,6 +7,7 @@ namespace SpaceHub.Application.Repository;
 public interface IpostRepository
 {
   Task<List<PostDto>> GetPostsList(int offset);
+  Task<PostDetailDto?> GetPostDetail(int idPost);
 }
 
 public class PostRepository : IpostRepository
@@ -31,5 +32,20 @@ public class PostRepository : IpostRepository
     .Take(10)
     .Skip(offset)
     .ToListAsync();
+  }
+
+  public async Task<PostDetailDto?> GetPostDetail(int idPost){
+    return await _appDbContext.Posts
+    .OrderBy(post => post.id_post)
+    .Include(post => post.CategoryFk)
+    .Select(post => new PostDetailDto
+    {
+      Category = post.CategoryFk != null ? post.CategoryFk.category : "Sin categoria",
+      ImagePath = post.path_image,
+      TextContent = post.text_content,
+      TextDescription = post.post_description,
+      Title = post.title
+    })
+    .FirstOrDefaultAsync();
   }
 }

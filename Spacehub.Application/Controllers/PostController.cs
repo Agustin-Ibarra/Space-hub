@@ -33,4 +33,19 @@ public class PostController : Controller
       return StatusCode(503, new { error = "Ocurrio un error en la base de datos" });
     }
   }
+
+  [HttpGet]
+  [Route("/posts/detail/api/{idPost}")]
+  public async Task<IActionResult> PostDetail(int idPost)
+  {
+    try
+    {
+      var posts = await _postRepository.GetPostDetail(idPost);
+      return Ok(posts);
+    }
+    catch (Exception)
+    {
+      return StatusCode(503, new { error = "Ocurrio un error en la base de datos" });
+    }
+  }
 }
