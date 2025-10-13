@@ -52,9 +52,9 @@ generateObjects();
 
 
 $body.addEventListener("click", (e) => {
-  e.preventDefault();
-  console.log(e.target);
+  // console.log(e.target);
   if(e.target.matches(".article-content-link")){
+    e.preventDefault();
     sessionStorage.setItem("id",e.target.id);
     window.location.href = "/astronomical_objects/info"
   }
