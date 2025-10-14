@@ -38,13 +38,16 @@ public class PostRepository : IpostRepository
     return await _appDbContext.Posts
     .OrderBy(post => post.id_post)
     .Include(post => post.CategoryFk)
+    .Where(post => post.id_post == idPost)
     .Select(post => new PostDetailDto
     {
       Category = post.CategoryFk != null ? post.CategoryFk.category : "Sin categoria",
       ImagePath = post.path_image,
       TextContent = post.text_content,
       TextDescription = post.post_description,
-      Title = post.title
+      Title = post.title,
+      Id = post.id_post,
+      CreatedAt = post.created_at
     })
     .FirstOrDefaultAsync();
   }
