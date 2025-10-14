@@ -8,6 +8,7 @@ public interface IpostRepository
 {
   Task<List<PostDto>> GetPostsList(int offset);
   Task<PostDetailDto?> GetPostDetail(int idPost);
+  Task<List<PostDto>> GetPostsSuggestion();
 }
 
 public class PostRepository : IpostRepository
@@ -21,6 +22,7 @@ public class PostRepository : IpostRepository
   {
     return await _appDbContext.Posts
     .OrderBy(post => post.id_post)
+    .OrderDescending()
     .Include(post => post.CategoryFk)
     .Select(post => new PostDto
     {
@@ -34,7 +36,8 @@ public class PostRepository : IpostRepository
     .ToListAsync();
   }
 
-  public async Task<PostDetailDto?> GetPostDetail(int idPost){
+  public async Task<PostDetailDto?> GetPostDetail(int idPost)
+  {
     return await _appDbContext.Posts
     .OrderBy(post => post.id_post)
     .Include(post => post.CategoryFk)
@@ -50,5 +53,22 @@ public class PostRepository : IpostRepository
       CreatedAt = post.created_at
     })
     .FirstOrDefaultAsync();
+  }
+  
+  public async Task<List<PostDto>> GetPostsSuggestion()
+  {
+    return await _appDbContext.Posts
+    .OrderBy(post => post.id_post)
+    .OrderDescending()
+    .Include(post => post.CategoryFk)
+    .Select(post => new PostDto
+    {
+      Category = post.CategoryFk != null ? post.CategoryFk.category : "Sin categoria",
+      ImagePath = post.path_image,
+      Title = post.title,
+      Id = post.id_post
+    })
+    .Take(3)
+    .ToListAsync();
   }
 }

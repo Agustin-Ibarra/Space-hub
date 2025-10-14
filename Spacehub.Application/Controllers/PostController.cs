@@ -56,4 +56,19 @@ public class PostController : Controller
       return StatusCode(503, new { error = "Ocurrio un error en la base de datos" });
     }
   }
+
+  [HttpGet]
+  [Route("/posts/info/suggestion")]
+  public async Task<IActionResult> PostSuggestion()
+  {
+    try
+    {
+      var suggestion = await _postRepository.GetPostsSuggestion();
+      return Ok(suggestion);
+    }
+    catch (Exception)
+    {
+      return StatusCode(503, new { error = "Ocurrio un error en la base de datos" });
+    }
+  }
 }
