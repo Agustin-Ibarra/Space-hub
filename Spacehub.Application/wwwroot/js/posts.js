@@ -1,3 +1,4 @@
+const $body = document.querySelector("body");
 let offset = 0;
 
 fetch(`/posts/api/${offset}`)
@@ -30,7 +31,8 @@ fetch(`/posts/api/${offset}`)
       $category.setAttribute("class","category");
       $category.textContent = `Categoria: ${post.category}`;
       $link.setAttribute("class","article-content-link");
-      $link.setAttribute("src",post.id);
+      $link.setAttribute("id",post.id);
+      $link.setAttribute("href","/posts/info");
       $link.textContent = "Ver notitcia completa";
     });
     console.log(posts);
@@ -38,4 +40,10 @@ fetch(`/posts/api/${offset}`)
 })
 .catch((error)=>{
   console.log(error);
+})
+
+$body.addEventListener("click",(e)=>{
+  if(e.target.matches(".article-content-link")){
+    sessionStorage.setItem("id",e.target.id);
+  }
 })

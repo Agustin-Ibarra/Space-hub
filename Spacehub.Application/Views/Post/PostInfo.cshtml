@@ -1,0 +1,35 @@
+@{
+  ViewData["Title"] = "Space Hub | Publicaciones";
+  ViewData["link1"] = "Pagina Principal";
+  ViewData["path1"] = "/";
+  ViewData["icon1"] = "home";
+  ViewData["link2"] = "Objetos Astronómicos";
+  ViewData["path2"] = "/astronomical_objects";
+  ViewData["icon2"] = "planet";
+  ViewData["link3"] = "Tienda Espacial";
+  ViewData["path3"] = "/items";
+  ViewData["icon3"] = "shopping_bag";
+}
+
+<link rel="stylesheet" href="~/css/content.css">
+<section class="main">
+  <section class="content-container">
+    <article class="object-info-article">
+      <section class="object-info-section">
+        <p class="object-info-title"></p>
+        <p class="category">Categoria: </p>
+        <div class="object-info-img-div post-img-div">
+          <img src="" alt="" class="post-image-div">
+          <p class="roboto-content-text sub-title-post"></p>
+        </div>
+        <p class="object-info-text roboto-content-text"></p>
+        <p class="roboto-content-text created-at"></p>
+      </section>
+      <aside>
+        <p class="aside-title">Podria ser de tu interes</p>
+        <ul class="object-sub-list"></ul>
+      </aside>
+    </article>
+  </section>
+</section>
+<script src="~/js/postsInfo.js"></script>
