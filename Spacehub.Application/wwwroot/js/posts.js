@@ -1,7 +1,7 @@
 const $body = document.querySelector("body");
 let offset = 0;
 
-fetch(`/posts/api/${offset}`)
+fetch(`/api/posts/${offset}`)
 .then(async(response)=>{
   if(response.status === 200){
     const posts = await response.json();

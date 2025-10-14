@@ -1,4 +1,4 @@
-fetch(`/posts/info/api/${sessionStorage.getItem("id")}`)
+fetch(`/api/posts/info/${sessionStorage.getItem("id")}`)
 .then(async(response)=>{
   if(response.status === 200){
     const post = await response.json();

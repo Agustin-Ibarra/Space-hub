@@ -28,7 +28,7 @@ public class PostController : Controller
 
 
   [HttpGet]
-  [Route("/posts/api/{offset}")]
+  [Route("/api/posts/{offset}")]
   public async Task<IActionResult> PostApi(int offset)
   {
     try
@@ -43,7 +43,7 @@ public class PostController : Controller
   }
 
   [HttpGet]
-  [Route("/posts/info/api/{idPost}")]
+  [Route("/api/posts/info/{idPost}")]
   public async Task<IActionResult> PostDetail(int idPost)
   {
     try
@@ -58,7 +58,7 @@ public class PostController : Controller
   }
 
   [HttpGet]
-  [Route("/posts/info/suggestion")]
+  [Route("/api/posts/info/suggestion")]
   public async Task<IActionResult> PostSuggestion()
   {
     try

@@ -1,4 +1,4 @@
-fetch(`/astronomical_objects/detail/api/${sessionStorage.getItem("id")}`)
+fetch(`/api/astronomical_objects/info/${sessionStorage.getItem("id")}`)
 .then(async(response)=>{
   if(response.status === 200){
     const astronomicalObject = await response.json();
@@ -17,7 +17,7 @@ fetch(`/astronomical_objects/detail/api/${sessionStorage.getItem("id")}`)
   console.log(error);
 });
 
-fetch("/astronomical_objects/suggestion")
+fetch("/api/astronomical_objects/suggestion")
 .then(async(response)=>{
   if(response.status === 200){
     const suggestions = await response.json();

@@ -3,7 +3,7 @@ const $astronomicalObjectList = document.querySelector(".content-list");
 let offset = 0;
 
 const generateObjects = function () {
-  fetch(`/astronomical_objects/api/${offset}`)
+  fetch(`/api/astronomical_objects/${offset}`)
   .then(async (response) => {
     if (response.status === 200) {
       const astronomicalObjectList = await response.json();

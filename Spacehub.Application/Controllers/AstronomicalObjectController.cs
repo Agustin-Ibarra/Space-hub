@@ -27,7 +27,7 @@ public class AstronomicalObjectController : Controller
   }
 
   [HttpGet]
-  [Route("/astronomical_objects/api/{offset}")]
+  [Route("/api/astronomical_objects/{offset}")]
   public async Task<IActionResult> AstronomicalObjectApi(int offset)
   {
     try
@@ -42,7 +42,7 @@ public class AstronomicalObjectController : Controller
   }
 
   [HttpGet]
-  [Route("/astronomical_objects/detail/api/{idObject}")]
+  [Route("/api/astronomical_objects/info/{idObject}")]
   public async Task<IActionResult> AstronomicalObjectDeatilApi(int idObject)
   {
     try
@@ -57,7 +57,7 @@ public class AstronomicalObjectController : Controller
   }
 
   [HttpGet]
-  [Route("/astronomical_objects/suggestion")]
+  [Route("/api/astronomical_objects/suggestion")]
   public async Task<IActionResult> AstronomicalObjectsSuggestion()
   {
     try
