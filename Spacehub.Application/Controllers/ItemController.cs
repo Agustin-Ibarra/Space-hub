@@ -26,7 +26,7 @@ public class ItemController : Controller
 
   [HttpGet]
   [Route("/api/items/{offset}")]
-  public async Task<IActionResult> GetItems(int offset)
+  public async Task<IActionResult> ApiItemsList(int offset)
   {
     try
     {
@@ -36,6 +36,21 @@ public class ItemController : Controller
     catch (Exception)
     {
       return StatusCode(503, new { error = "Ocurrio un error en la base de datos" });
+    }
+  }
+
+  [HttpGet]
+  [Route("/api/items/detail/{idItem}")]
+  public async Task<IActionResult> ApiItemDetail(int idItem)
+  {
+    try
+    {
+      var item = await _itemRepository.GetItemDetail(idItem);
+      return Ok(item);
+    }
+    catch (Exception)
+    {
+      return StatusCode(503, new { error = "Ocurrio un erro en la base de datos" });      
     }
   }
 }
