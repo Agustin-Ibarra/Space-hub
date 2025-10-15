@@ -103,6 +103,9 @@ h3 {
   color: #5b6179;
   font-size: 20px;
   font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .item-price {
