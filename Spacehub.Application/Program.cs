@@ -28,6 +28,7 @@ if (stringConnection != null)
   builder.Services.AddScoped<IAstronomicalObjectRepository, AstronomicalObjectRepository>();
   builder.Services.AddScoped<IpostRepository, PostRepository>();
   builder.Services.AddScoped<IItemRespotory, ItemRepository>();
+  builder.Services.AddScoped<ICartRepository, CartRepository>();
 }
 else
 {
