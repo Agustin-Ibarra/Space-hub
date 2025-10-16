@@ -1,3 +1,4 @@
+const $body = document.querySelector("body");
 let offset = 0;
 
 fetch(`/api/items/${offset}`)
@@ -28,6 +29,7 @@ fetch(`/api/items/${offset}`)
       $price.textContent = Number(item.itemUnitPrice).toFixed(2);
       $itemLink.setAttribute("class","item-link");
       $itemLink.setAttribute("href","/items/details");
+      $itemLink.setAttribute("id",item.idItem);
       $itemLink.textContent = "Ver articulo";
     });
     console.log(items);
@@ -35,4 +37,10 @@ fetch(`/api/items/${offset}`)
 })
 .catch((error)=>{
   console.log(error);
+})
+
+$body.addEventListener("click",(e)=>{
+  if(e.target.matches(".item-link")){
+    sessionStorage.setItem("idItem",e.target.id);
+  }
 })
