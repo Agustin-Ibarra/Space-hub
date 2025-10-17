@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SpaceHub.Application.Dtos;
 using SpaceHub.Application.Models;
@@ -22,23 +23,31 @@ public class CartController : Controller
 
   [HttpPost]
   [Route("/api/cart")]
+  [Authorize]
   public async Task<IActionResult> AddItemToCart(ItemData item)
   {
-    try
+    if (!ModelState.IsValid)
     {
-      var cart = new Cart
-      {
-        id_item = item.IdItem,
-        quantity = item.Quantity,
-        id_user = Convert.ToInt16(User.FindFirstValue(ClaimTypes.NameIdentifier))
-      };
-      await _cartRepository.AddItemToCart(cart);
-
-      return Created("/cart",new {message = "Articulo agregado al carrito"});
+      var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
+      return BadRequest(new { error = errors });
     }
-    catch (Exception)
-    {
-      return StatusCode(503, new { error = "Ocurrio un error en la base de datos" });
+    else{
+      try
+      {
+        var cart = new Cart
+        {
+          id_item = item.IdItem,
+          quantity = item.Quantity,
+          id_user = Convert.ToInt16(User.FindFirstValue(ClaimTypes.NameIdentifier))
+        };
+        await _cartRepository.AddItemToCart(cart);
+
+        return Created("/cart",new {message = "Articulo agregado al carrito"});
+      }
+      catch (Exception)
+      {
+        return StatusCode(503, new { error = "Ocurrio un error en la base de datos" });
+      }
     }
   }
 }

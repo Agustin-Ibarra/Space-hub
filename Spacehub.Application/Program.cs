@@ -18,6 +18,21 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
   options.SlidingExpiration = true;
   options.Cookie.HttpOnly = true;
   options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+  options.Events = new CookieAuthenticationEvents
+  {
+    OnRedirectToLogin = context =>
+    {
+      if (context.Request.Path.StartsWithSegments("/api"))
+      {
+        context.Response.StatusCode = 401;
+        return Task.CompletedTask;
+      }
+      else
+      {
+        return Task.CompletedTask;
+      }
+    }
+  };
 });
 
 
@@ -41,9 +56,9 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+  app.UseExceptionHandler("/Home/Error");
+  // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+  app.UseHsts();
 }
 
 app.UseHttpsRedirection();
