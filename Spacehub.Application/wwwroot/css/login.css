@@ -14,13 +14,13 @@ body {
   align-items: center;
   margin-top: 3rem;
   padding: 4rem 1rem;
-  background-color: #1d1d1d;
+  background-color: #ffffff;
 }
 
 .form-img {
   width: 600px;
   height: 400px;
-  background-color: #96969621;
+  background-color: #2a5d69;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -42,28 +42,30 @@ form {
   width: 450px;
   padding: 2rem;
   border-radius: 10px;
-  border: #ffffff34 2px solid;
+  border: #58585834 2px solid;
   text-align: center;
+  background-color: #7070700c;
 }
 .form-title{
   text-align: center;
   font-size: 18px;
   font-weight: 600;
+  color: #131b25;
 }
 
 input {
   background: none;
   border: none;
-  background-color: #ffffff34;
+  background-color: #00000015;
   padding: 10px;
   border-radius: 10px;
   font-size: 16px;
   text-align: center;
-  color: #ffffff;
+  color: #131b25;
   outline: none ;
 }
 input::placeholder{
-  color: #bebebe;
+  color: #646464;
 }
 
 button {
@@ -79,8 +81,12 @@ button {
 
 .redirect-form-text{
   font-weight: 600;
+  color: #131b25;
 }
 .redirect-link{
-  color: #c5c5c5;
+  color: #2a5d69;
   font-weight: 600;
+}
+.error-form{
+  color: #ff0000;
 }

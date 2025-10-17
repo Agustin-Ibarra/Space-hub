@@ -1,14 +1,19 @@
+const $body = document.querySelector("body");
+const $itemImage = document.querySelector(".item-detail-img");
+const $itemName = document.querySelector(".item-detail-name");
+const $itemDescription = document.querySelector(".item-detail-description");
+const $itemPrice = document.querySelector(".item-detail-price");
+const $itemStock = document.querySelector(".item-detail-stock");
+const $stock = document.querySelector(".item-detail-options-quantity");
+let quantity = 1;
+
 fetch(`/api/items/detail/${sessionStorage.getItem("idItem")}`)
 .then(async(response)=>{
   if(response.status === 200){
     const item = await response.json();
     console.log(item);
-    const $itemImage = document.querySelector(".item-detail-img");
-    const $itemName = document.querySelector(".item-detail-name");
-    const $itemDescription = document.querySelector(".item-detail-description");
-    const $itemPrice = document.querySelector(".item-detail-price");
-    const $itemStock = document.querySelector(".item-detail-stock");
     $itemImage.setAttribute("src",item.itemImage);
+    $itemImage.setAttribute("id",item.idItem)
     $itemDescription.textContent = item.itemDescription;
     $itemName.textContent = item.itemName;
     $itemPrice.textContent = `$ ${Number(item.itemUnitPrice).toFixed(2)}`;
@@ -17,4 +22,46 @@ fetch(`/api/items/detail/${sessionStorage.getItem("idItem")}`)
 })
 .catch((error)=>{
   console.log(error);
+})
+
+$body.addEventListener("click",(e)=>{
+  // console.log(e.target);
+  if(e.target.matches(".add-btn")){
+    if(quantity < 5 && quantity < Number($itemStock.textContent.replace("Stock disponible: ",""))){
+      quantity ++;
+      $stock.textContent = quantity;
+    }
+  }
+  else if(e.target.matches(".less-btn")){
+    if(quantity > 1){
+      quantity --;
+      $stock.textContent = quantity;
+    }
+  }
+  else if(e.target.matches(".item-detail-add-cart-btn") || e.target.matches(".add-cart-icon-btn")){
+    const itemObject = {
+      idItem : $itemImage.id,
+      quantity : quantity
+    }
+    // console.log(itemObject)
+    fetch("/api/cart",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(itemObject)
+    })
+    .then(async(response)=>{
+      if(response.status === 401){
+        window.location.href = "/login";
+      }
+      else{
+        if(response.status === 201){
+          const newItem = await response.json();
+          console.log(newItem)
+        }
+      }
+    })
+    .catch((error)=>{
+      console.log(error);
+    })
+  }
 })

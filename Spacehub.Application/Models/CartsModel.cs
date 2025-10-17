@@ -13,5 +13,6 @@ public class Cart
 
   [ForeignKey("id_user")]
   public User? UserFk { get; set; }
+  [ForeignKey("id_item")]
   public Item? ItemFk { get; set; }
 }

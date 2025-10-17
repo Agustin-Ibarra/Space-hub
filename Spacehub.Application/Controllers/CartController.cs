@@ -9,8 +9,8 @@ namespace SpaceHub.Application.Controllers;
 
 public class CartController : Controller
 {
-  private readonly CartRepository _cartRepository;
-  public CartController (CartRepository cartRepository)
+  private readonly ICartRepository _cartRepository;
+  public CartController (ICartRepository cartRepository)
   {
     _cartRepository = cartRepository;
   }
@@ -24,7 +24,7 @@ public class CartController : Controller
   [HttpPost]
   [Route("/api/cart")]
   [Authorize]
-  public async Task<IActionResult> AddItemToCart(ItemData item)
+  public async Task<IActionResult> AddItemToCart([FromBody] ItemCartDto item)
   {
     if (!ModelState.IsValid)
     {
