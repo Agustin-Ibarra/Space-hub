@@ -24,14 +24,15 @@ public class CartController : Controller
   [HttpPost]
   [Route("/api/cart")]
   [Authorize]
-  public async Task<IActionResult> AddItemToCart([FromBody] ItemCartDto item)
+  public async Task<IActionResult> AddItemToCart([FromBody] CartItemDto item)
   {
     if (!ModelState.IsValid)
     {
       var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
       return BadRequest(new { error = errors });
     }
-    else{
+    else
+    {
       try
       {
         var cart = new Cart
@@ -42,12 +43,29 @@ public class CartController : Controller
         };
         await _cartRepository.AddItemToCart(cart);
 
-        return Created("/cart",new {message = "Articulo agregado al carrito"});
+        return Created("/cart", new { message = "Articulo agregado al carrito" });
       }
       catch (Exception)
       {
         return StatusCode(503, new { error = "Ocurrio un error en la base de datos" });
       }
+    }
+  }
+
+  [HttpGet]
+  [Route("/api/cart/items")]
+  [Authorize]
+  public async Task<IActionResult> ApiCartItems()
+  {
+    try
+    {
+      int idUser = Convert.ToInt16(User.FindFirstValue(ClaimTypes.NameIdentifier));
+      var CartiItems = await _cartRepository.GetCartItems(idUser);
+      return Ok(CartiItems);
+    }
+    catch (Exception)
+    {
+      return StatusCode(503, new { error = "Ocurrio un error en la base de datos" });
     }
   }
 }
