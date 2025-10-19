@@ -251,13 +251,6 @@ h3 {
   background-size: cover;
 }
 
-.items {
-  background-image: url(../images/items/remera.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-}
-
 .redirect-text {
   color: #263b58;
   font-size: 30px;
@@ -279,7 +272,7 @@ h3 {
 .item-section-content{
   width: 900px;
   height: 450px;
-  background-image: url(../images/items/remera.png);
+  background-image: url(../images/items/gorra-2.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
