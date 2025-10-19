@@ -11,7 +11,6 @@ fetch(`/api/items/detail/${sessionStorage.getItem("idItem")}`)
 .then(async(response)=>{
   if(response.status === 200){
     const item = await response.json();
-    console.log(item);
     $itemImage.setAttribute("src",item.itemImage);
     $itemImage.setAttribute("id",item.idItem)
     $itemDescription.textContent = item.itemDescription;
@@ -25,7 +24,6 @@ fetch(`/api/items/detail/${sessionStorage.getItem("idItem")}`)
 })
 
 $body.addEventListener("click",(e)=>{
-  // console.log(e.target);
   if(e.target.matches(".add-btn")){
     if(quantity < 5 && quantity < Number($itemStock.textContent.replace("Stock disponible: ",""))){
       quantity ++;
@@ -43,7 +41,6 @@ $body.addEventListener("click",(e)=>{
       idItem : $itemImage.id,
       quantity : quantity
     }
-    // console.log(itemObject)
     fetch("/api/cart",{
       method:"POST",
       headers:{"Content-Type":"application/json"},
@@ -55,8 +52,7 @@ $body.addEventListener("click",(e)=>{
       }
       else{
         if(response.status === 201){
-          const newItem = await response.json();
-          console.log(newItem)
+          window.location.href = "/cart";
         }
       }
     })

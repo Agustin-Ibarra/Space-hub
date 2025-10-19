@@ -14,6 +14,8 @@ public class CartController : Controller
   {
     _cartRepository = cartRepository;
   }
+
+  [Authorize]
   [HttpGet]
   [Route("/cart")]
   public IActionResult Cart()
@@ -21,9 +23,9 @@ public class CartController : Controller
     return View();
   }
 
+  [Authorize]
   [HttpPost]
   [Route("/api/cart")]
-  [Authorize]
   public async Task<IActionResult> AddItemToCart([FromBody] CartItemDto item)
   {
     if (!ModelState.IsValid)
@@ -52,16 +54,23 @@ public class CartController : Controller
     }
   }
 
+  [Authorize]
   [HttpGet]
   [Route("/api/cart/items")]
-  [Authorize]
   public async Task<IActionResult> ApiCartItems()
   {
     try
     {
       int idUser = Convert.ToInt16(User.FindFirstValue(ClaimTypes.NameIdentifier));
       var CartiItems = await _cartRepository.GetCartItems(idUser);
-      return Ok(CartiItems);
+      if (CartiItems.Count > 0)
+      {
+        return Ok(CartiItems);
+      }
+      else
+      {
+        return NotFound(new { errorMessage = "No se encontro resultados para este usuario" });
+      }
     }
     catch (Exception)
     {

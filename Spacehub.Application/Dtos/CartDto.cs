@@ -10,6 +10,7 @@ public class CartItemsDto
 {
   public int IdCart { get; set; }
   public required string ItemName { get; set; }
+  public required string imagePath { get; set; }
   public decimal UnitPrice { get; set; }
   public int Quantity { get; set; }
 }

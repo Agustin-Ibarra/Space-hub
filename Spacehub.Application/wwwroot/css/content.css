@@ -225,17 +225,18 @@ h3 {
   justify-content: center;
   align-items: center;
   margin: 2rem 0;
+  gap: 1rem;
 }
 
 .cart-lits-item {
   background-color: #aaaaaa09;
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 100px 400px 220px;
   align-items: center;
-  width: 850px;
-  padding: 1rem;
+  padding: 2rem;
   border-radius: 10px;
   border: #90A1B9 2px solid;
+  gap: 2rem;
 }
 
 .cart-item-description-div {
@@ -274,7 +275,9 @@ h3 {
   border-radius: 10px;
   display: flex;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
+  gap: 5px;
 }
 
 .cart-delete-item-btn .material-symbols-outlined {
@@ -427,10 +430,6 @@ aside {
   border-bottom: #131b25 2px solid;
   padding-bottom: 1rem;
 }
-
-/* .post-image-div {
-  margin-bottom: 1rem;
-} */
 
 .object-sub-list-img-div {
   width: 100%;
