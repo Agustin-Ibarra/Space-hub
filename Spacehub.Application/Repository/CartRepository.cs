@@ -9,6 +9,7 @@ public interface ICartRepository
 {
   Task<List<CartItemsDto>> GetCartItems(int idUser);
   Task AddItemToCart(Cart cart);
+  Task DeleteItemToCart(Cart cart);
 }
 
 public class CartRepository : ICartRepository
@@ -40,6 +41,12 @@ public class CartRepository : ICartRepository
   public async Task AddItemToCart(Cart cart)
   {
     _appDbContext.Carts.Add(cart);
+    await _appDbContext.SaveChangesAsync();
+  }
+
+  public async Task DeleteItemToCart(Cart cart)
+  {
+    _appDbContext.Carts.Remove(cart);
     await _appDbContext.SaveChangesAsync();
   }
 }

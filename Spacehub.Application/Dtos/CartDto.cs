@@ -14,3 +14,9 @@ public class CartItemsDto
   public decimal UnitPrice { get; set; }
   public int Quantity { get; set; }
 }
+
+public class CartDto{
+  public int IdCart { get; set; }
+  public int IdItem {get;set;}
+  public int Quantity { get; set; }
+}
