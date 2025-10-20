@@ -31,9 +31,10 @@ public class CartRepository : ICartRepository
     {
       ItemName = cartItem.ItemFk != null ? cartItem.ItemFk.item_name : "Articulo sin nombre",
       IdCart = cartItem.id_cart,
+      IdItem = cartItem.id_item,
       Quantity = cartItem.quantity,
       UnitPrice = cartItem.ItemFk != null ? cartItem.ItemFk.unit_price : 0,
-      imagePath = cartItem.ItemFk != null ? cartItem.ItemFk.path_image : "image_path"
+      ImagePath = cartItem.ItemFk != null ? cartItem.ItemFk.path_image : "image_path"
     })
     .ToListAsync();
   }

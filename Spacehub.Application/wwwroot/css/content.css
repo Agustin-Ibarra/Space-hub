@@ -231,12 +231,19 @@ h3 {
 .cart-lits-item {
   background-color: #aaaaaa09;
   display: grid;
-  grid-template-columns: 100px 400px 220px;
+  grid-template-columns: 100px 300px 150px;
   align-items: center;
-  padding: 2rem;
+  justify-content: space-around;
+  padding: 1rem;
   border-radius: 10px;
   border: #90A1B9 2px solid;
-  gap: 2rem;
+  width: 750px;
+}
+
+.cart-empty-text{
+  color: #7c7c7c;
+  font-weight: 600;
+  font-size:18px;
 }
 
 .cart-item-description-div {
@@ -279,9 +286,12 @@ h3 {
   cursor: pointer;
   gap: 5px;
 }
-
+.cart-delete-item-btn{
+  width: max-content;
+}
 .cart-delete-item-btn .material-symbols-outlined {
   color: #ffffff;
+  font-size: 20px;
 }
 
 .cart-pay-section {
@@ -514,4 +524,26 @@ aside {
 
 .send-chat-btn .material-symbols-outlined {
   color: #64635b;
+}
+
+.mini-spinner{
+  padding: 5px;
+  border: #ffffff 3px solid;
+  border-bottom: #ffffff6e 3px solid;
+  border-radius: 50px;
+  animation: loader 1000ms linear infinite;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.hidden{
+  display: none;
 }

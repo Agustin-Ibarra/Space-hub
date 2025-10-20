@@ -29,6 +29,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
       }
       else
       {
+        context.Response.Redirect(context.RedirectUri);
         return Task.CompletedTask;
       }
     }
