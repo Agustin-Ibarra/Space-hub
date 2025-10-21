@@ -1,7 +1,11 @@
 const $body = document.querySelector("body");
 const $cartList = document.querySelector(".cart-list");
 const $emptyCart = document.querySelector(".cart-empty-text");
+const $quantityResumen = document.querySelector(".quantity-items");
+const $subtotalResumen = document.querySelector(".subtotal");
+const $totalResumen = document.querySelector(".cart-pay-total");
 const cartList = [];
+let itemsList;
 
 fetch("/api/cart/items")
   .then(async (response) => {
@@ -10,11 +14,12 @@ fetch("/api/cart/items")
       let subtotal = 0;
       let total = 0;
       const items = await response.json();
+      itemsList = items;
       items.forEach(item => {
         const cart = {
-          idCart : item.idCart,
-          idItem : item.idItem,
-          quantity : item.quantity
+          idCart: item.idCart,
+          idItem: item.idItem,
+          quantity: item.quantity
         }
         cartList.push(cart);
         quantity += item.quantity
@@ -32,9 +37,6 @@ fetch("/api/cart/items")
         const $deleteBtn = document.createElement("button");
         const $span = document.createElement("span");
         const $spinner = document.createElement("div");
-        const $quantityResumen = document.querySelector(".quantity-items");
-        const $subtotalResumen = document.querySelector(".subtotal");
-        const $totalResumen = document.querySelector(".cart-pay-total");
         $cartList.appendChild($li);
         $li.setAttribute("class", "cart-lits-item");
         $li.appendChild($DataDivContainer);
@@ -45,6 +47,7 @@ fetch("/api/cart/items")
         $imageDiv.setAttribute("class", "cart-image-div");
         $imageDiv.appendChild($image);
         $image.setAttribute("src", item.imagePath);
+        $image.setAttribute("id", item.idItem);
         $divItemDescription.setAttribute("class", "cart-description-div");
         $divItemDescription.appendChild($itemName);
         $divItemDescription.appendChild($itemPrice);
@@ -68,7 +71,7 @@ fetch("/api/cart/items")
         $quantityResumen.textContent = `Articulos: ${quantity}`;
       });
     }
-    else if(response.status === 404){
+    else if (response.status === 404) {
       $emptyCart.classList.remove("hidden");
     }
   })
@@ -79,33 +82,46 @@ fetch("/api/cart/items")
 $body.addEventListener("click", (e) => {
   if (e.target.matches(".cart-delete-item-btn")) {
     let cartToDelete;
+    let index;
     e.target.childNodes[1].classList.add("hidden");
     e.target.childNodes[2].classList.remove("hidden");
     cartList.forEach(cart => {
-      if(Number(e.target.id) === cart.idCart){
+      if (Number(e.target.id) === cart.idCart) {
         cartToDelete = cart;
+        index = cartList.indexOf(cartToDelete)
       }
     });
-    // console.log(e.target.parentNode);
-    fetch("/api/cart/items",{
-      method:"DELETE",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify(cartToDelete)
+    fetch("/api/cart/items", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(cartToDelete)
     })
-    .then((response)=>{
-      if(response.status === 204){
-        $cartList.removeChild(e.target.parentNode)
-        if($cartList.childNodes.length === 1){
-          $emptyCart.classList.remove("hidden");
+      .then((response) => {
+        if (response.status === 204) {
+          $cartList.removeChild(e.target.parentNode)
+          let quantity = 0;
+          let subtotal = 0;
+          let total = 0;
+          itemsList.splice(index, 1);
+          itemsList.forEach(item => {
+            quantity += item.quantity;
+            total += item.unitPrice * item.quantity;
+            subtotal += item.unitPrice * item.quantity
+          });
+          if(itemsList.length === 0){
+            $emptyCart.classList.remove("hidden");
+          }
+          $totalResumen.textContent = `Total: $${Number(total).toFixed(2)}`;
+          $subtotalResumen.textContent = `Subtotal: $${Number(subtotal).toFixed(2)}`;
+          $quantityResumen.textContent = `Articulos: ${quantity}`;
         }
-      }
-    })
-    .catch((error)=>{
-      console.error(error);
-    })
-    .finally(()=>{
-      e.target.childNodes[1].classList.remove("hidden");
-      e.target.childNodes[2].classList.add("hidden");
-    });
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        e.target.childNodes[1].classList.remove("hidden");
+        e.target.childNodes[2].classList.add("hidden");
+      });
   }
 })
