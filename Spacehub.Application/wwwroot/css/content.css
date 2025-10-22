@@ -114,6 +114,7 @@ h3 {
   font-weight: 600;
 }
 
+.open-chat-btn,
 .item-link,
 .item-detail-add-cart-btn {
   background-color: #f33535;
@@ -130,6 +131,17 @@ h3 {
 
 .item-link:hover {
   background-color: #db2d2d;
+}
+
+.open-chat-btn{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 2rem;
+}
+.open-chat-btn .material-symbols-outlined{
+  color: #ffffff;
+  font-size: 20px;
 }
 
 .item-detail-container {
@@ -272,6 +284,7 @@ h3 {
   font-weight: 600;
 }
 
+.chat-link,
 .cart-delete-item-btn,
 .cart-pay-btn {
   background-color: #f33535;

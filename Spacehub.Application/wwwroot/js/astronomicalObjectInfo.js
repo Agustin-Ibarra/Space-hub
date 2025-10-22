@@ -8,7 +8,7 @@ fetch(`/api/astronomical_objects/info/${sessionStorage.getItem("id")}`)
     const $image = document.querySelector(".image-astronomical-object-info");
     const $textContent = document.querySelector(".object-info-text");
     $title.textContent = astronomicalObject.title;
-    $category.textContent = astronomicalObject.category;
+    $category.textContent = `Categoria: ${astronomicalObject.category}`;
     $image.setAttribute("src",astronomicalObject.imagePath);
     $textContent.innerHTML = textContent;
   }
