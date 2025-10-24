@@ -8,6 +8,8 @@ public interface IItemRespotory
 {
   Task<List<ItemDto>> GetListItems(int offset);
   Task<ItemDetailDto?> GetItemDetail(int idItem);
+  Task<bool> UpdateStock(int idItem, int quantity);
+  Task RestoreStock(int idItem, int quantity);
 }
 
 public class ItemRepository : IItemRespotory
@@ -51,5 +53,37 @@ public class ItemRepository : IItemRespotory
       ItemCategory = item.CategoryFk != null ? item.CategoryFk.category : "Sin categoria"
     })
     .FirstOrDefaultAsync();
+  }
+
+  public async Task<bool> UpdateStock(int idItem, int quantity)
+  {
+    var item = await _appDbContext.Items.FindAsync(idItem);
+    if (item != null)
+    {
+      var result = await _appDbContext.Database.ExecuteSqlRawAsync(
+        "update items set stock = stock - {1} where id_item = {0} and stock >= {1}",
+        idItem, quantity
+      );
+      if (result == 1)
+      {
+        return true;
+      }
+      else
+      {
+        return false;
+      }
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+  public async Task RestoreStock(int idItem, int quantity)
+  {
+    var result = await _appDbContext.Database.ExecuteSqlRawAsync(
+        "update items set stock = stock + {1} where id_item = {0}",
+        idItem, quantity
+    );
   }
 }
