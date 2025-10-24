@@ -45,6 +45,7 @@ if (stringConnection != null)
   builder.Services.AddScoped<IpostRepository, PostRepository>();
   builder.Services.AddScoped<IItemRespotory, ItemRepository>();
   builder.Services.AddScoped<ICartRepository, CartRepository>();
+  builder.Services.AddScoped<IPurchaseRepository, PurchaseRepository>();
 }
 else
 {

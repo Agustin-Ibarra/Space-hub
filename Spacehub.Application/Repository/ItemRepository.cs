@@ -10,6 +10,7 @@ public interface IItemRespotory
   Task<ItemDetailDto?> GetItemDetail(int idItem);
   Task<bool> UpdateStock(int idItem, int quantity);
   Task RestoreStock(int idItem, int quantity);
+  Task<ItemUnitPriceDto?> GetItemPrice(int idItem);
 }
 
 public class ItemRepository : IItemRespotory
@@ -81,9 +82,19 @@ public class ItemRepository : IItemRespotory
 
   public async Task RestoreStock(int idItem, int quantity)
   {
-    var result = await _appDbContext.Database.ExecuteSqlRawAsync(
-        "update items set stock = stock + {1} where id_item = {0}",
-        idItem, quantity
+    await _appDbContext.Database.ExecuteSqlRawAsync(
+      "update items set stock = stock + {1} where id_item = {0}",
+      idItem, quantity
     );
+  }
+
+  public async Task<ItemUnitPriceDto?> GetItemPrice(int idItem)
+  {
+    var itemPrice = await _appDbContext.Items
+    .OrderBy(item => item.id_item)
+    .Where(item => item.id_item == idItem)
+    .Select(item => new ItemUnitPriceDto { UnitPrice = item.unit_price })
+    .FirstOrDefaultAsync();
+    return itemPrice;
   }
 }

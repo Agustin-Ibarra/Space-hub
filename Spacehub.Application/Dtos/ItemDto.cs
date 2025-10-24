@@ -23,7 +23,9 @@ public class ItemDetailDto
 
 public class ItemReserveDto
 {
+  [Range(1, 100, ErrorMessage = "El id del articulo esta fuera del rango")]
   public int IdItem { get; set; }
+  [Range(1, 5, ErrorMessage = "La cantidad esta fuera del rango")]
   public int Quantity { get; set; }
 }
 
@@ -31,4 +33,9 @@ public class ItemsListDto
 {
   [MinLength(1, ErrorMessage = "La lista no contiene articulos")]
   public required List<ItemReserveDto> Items { get; set; }
+}
+
+public class ItemUnitPriceDto
+{
+  public decimal UnitPrice {get;set;}
 }
