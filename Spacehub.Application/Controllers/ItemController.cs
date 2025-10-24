@@ -69,7 +69,7 @@ public class ItemController : Controller
     }
     else
     {
-      List<ItemReserveDto> ItemsRejected = [];
+      List<ItemReserveDto> ItemsRejected = []; // lista de articulos rechazados por stock insuficiente
       try
       {
         foreach (var item in itemsList.Items)
@@ -77,31 +77,36 @@ public class ItemController : Controller
           bool result = await _itemRepository.UpdateStock(item.IdItem, item.Quantity);
           if(result != true)
           {
-            ItemsRejected.Add(item);
+            // si la consulta retorna false no se pudo actualizar el stock al reservar el articulo
+            // se agrega la informacion del articulo que no pudo ser actualizado en la lista
+            ItemsRejected.Add(item); 
           }
         }
         if(ItemsRejected.Count == 0){
+          // si la lista esta vacia indica que no ocurrieron errores al actualizar stock
           return Ok(new {message = "Articulos reservados"});
         }
         else{
+          // en caso contrario se recorre la lista para restaurar stock original
           foreach (var item in itemsList.Items)
           {
             int iter = 0;
-            if(item.IdItem != ItemsRejected[iter].IdItem)
+            if(item.IdItem != ItemsRejected[iter].IdItem) 
             {
+              // se restaura el stock solo a los articulos que no fueron rechazados
               await _itemRepository.RestoreStock(item.IdItem, item.Quantity);
             }
           }
           return BadRequest(new
           {
-            errorMessage = "No hay stock suficiente para algunos articulos",
+            error = "No hay stock suficiente para algunos articulos",
             itemsRejected = ItemsRejected
           });
         }
       }
-      catch (Exception ex)
+      catch (Exception)
       {
-        return StatusCode(503,ex.Message);
+        return StatusCode(503, new { error = "Ocurrio un error en la base de datos" });
       }
     }
   }
