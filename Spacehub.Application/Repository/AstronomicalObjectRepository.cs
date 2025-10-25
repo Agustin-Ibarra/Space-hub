@@ -8,7 +8,7 @@ public interface IAstronomicalObjectRepository
 {
   Task<List<AstronomicalObjectDto>> GetAstronomicalObjectList(int offset);
   Task<AstronomicalObjectDetail?> GetAstronomicalObject(int idObject);
-  Task<List<AstronomicalObjectDto>> GetAstronomicalObjectSuggestion();
+  Task<List<AstronomicalObjectDto>> GetAstronomicalObjectSuggestion(int idObject);
 }
 
 public class AstronomicalObjectRepository : IAstronomicalObjectRepository
@@ -51,12 +51,13 @@ public class AstronomicalObjectRepository : IAstronomicalObjectRepository
     .FirstOrDefaultAsync();
   }
 
-  public async Task<List<AstronomicalObjectDto>> GetAstronomicalObjectSuggestion()
+  public async Task<List<AstronomicalObjectDto>> GetAstronomicalObjectSuggestion(int idObject)
   {
     return await _AppDbContext.AstronomicalObjects
     .OrderBy(astronomical => astronomical.id_object)
     .OrderDescending()
     .Include(astronomical => astronomical.CategoryFk)
+    .Where(astronomical => astronomical.id_object != idObject)
     .Select(astronomical => new AstronomicalObjectDto
     {
       Category = astronomical.CategoryFk != null ? astronomical.CategoryFk.category : "Sin categoria",

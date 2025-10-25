@@ -8,7 +8,7 @@ public interface IpostRepository
 {
   Task<List<PostDto>> GetPostsList(int offset);
   Task<PostDetailDto?> GetPostDetail(int idPost);
-  Task<List<PostDto>> GetPostsSuggestion();
+  Task<List<PostDto>> GetPostsSuggestion(int idPost);
 }
 
 public class PostRepository : IpostRepository
@@ -55,12 +55,13 @@ public class PostRepository : IpostRepository
     .FirstOrDefaultAsync();
   }
   
-  public async Task<List<PostDto>> GetPostsSuggestion()
+  public async Task<List<PostDto>> GetPostsSuggestion(int idPost)
   {
     return await _appDbContext.Posts
     .OrderBy(post => post.id_post)
     .OrderDescending()
     .Include(post => post.CategoryFk)
+    .Where(post => post.id_post != idPost)
     .Select(post => new PostDto
     {
       Category = post.CategoryFk != null ? post.CategoryFk.category : "Sin categoria",

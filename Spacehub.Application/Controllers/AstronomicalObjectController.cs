@@ -57,12 +57,12 @@ public class AstronomicalObjectController : Controller
   }
 
   [HttpGet]
-  [Route("/api/astronomical_objects/suggestion")]
-  public async Task<IActionResult> AstronomicalObjectsSuggestion()
+  [Route("/api/astronomical_objects/suggestion/{id}")]
+  public async Task<IActionResult> AstronomicalObjectsSuggestion(int id)
   {
     try
     {
-      var astronomicalObjest = await _IAstronomicalObjectRepository.GetAstronomicalObjectSuggestion();
+      var astronomicalObjest = await _IAstronomicalObjectRepository.GetAstronomicalObjectSuggestion(id);
       return Ok(astronomicalObjest);
     }
     catch (Exception)

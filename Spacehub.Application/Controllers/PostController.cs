@@ -58,12 +58,12 @@ public class PostController : Controller
   }
 
   [HttpGet]
-  [Route("/api/posts/info/suggestion")]
-  public async Task<IActionResult> PostSuggestion()
+  [Route("/api/posts/info/suggestion/{idPost}")]
+  public async Task<IActionResult> PostSuggestion(int idPost)
   {
     try
     {
-      var suggestion = await _postRepository.GetPostsSuggestion();
+      var suggestion = await _postRepository.GetPostsSuggestion(idPost);
       return Ok(suggestion);
     }
     catch (Exception)

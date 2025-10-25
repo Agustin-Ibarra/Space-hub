@@ -24,7 +24,7 @@ fetch(`/api/posts/info/${sessionStorage.getItem("id")}`)
   console.log(error);
 })
 
-fetch("/api/posts/info/suggestion")
+fetch(`/api/posts/info/suggestion/${sessionStorage.getItem("id")}`)
 .then(async(response)=>{
   if(response.status === 200){
     const suggestions = await response.json();
