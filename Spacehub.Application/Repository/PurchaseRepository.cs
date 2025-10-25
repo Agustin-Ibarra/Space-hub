@@ -6,6 +6,7 @@ namespace SpaceHub.Application.Repository;
 public interface IPurchaseRepository
 {
   Task<PurchaseOrder> CreatePurchaseOrder(PurchaseOrder purchaseOrder);
+  Task CreatePurchaseDetail(PurchaseDetail purchaseDetail);
 }
 
 public class PurchaseRepository : IPurchaseRepository
@@ -22,5 +23,11 @@ public class PurchaseRepository : IPurchaseRepository
     _appDbContext.PurchaseOrders.Add(purchaseOrder);
     await _appDbContext.SaveChangesAsync();
     return purchaseOrder;
+  }
+
+  public async Task CreatePurchaseDetail(PurchaseDetail purchaseDetail)
+  {
+    _appDbContext.PurchaseDetails.Add(purchaseDetail);
+    await _appDbContext.SaveChangesAsync();
   }
 }

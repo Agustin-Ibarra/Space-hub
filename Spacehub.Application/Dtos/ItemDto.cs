@@ -37,5 +37,5 @@ public class ItemsListDto
 
 public class ItemUnitPriceDto
 {
-  public decimal UnitPrice {get;set;}
+  public decimal UnitPrice { get; set; }
 }

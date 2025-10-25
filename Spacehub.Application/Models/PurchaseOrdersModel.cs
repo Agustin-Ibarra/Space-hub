@@ -10,6 +10,7 @@ public class PurchaseOrder
   public int id_customer { get; set; }
   public DateTime purchase_date { get; set; }
   public required string seller { get; set; }
+  [Column(TypeName = "decimal(8,2)")]
   public decimal total { get; set; }
 
   [ForeignKey("id_customer")]

@@ -10,7 +10,9 @@ public class PurchaseDetail
   public int id_purchase_order { get; set; }
   public int id_item { get; set; }
   public int quantity { get; set; }
+  [Column(TypeName = "decimal(8,2)")]
   public decimal unit_price { get; set; }
+  [Column(TypeName = "decimal(8,2)")]
   public decimal subtotal { get; set; }
 
   [ForeignKey("id_purchase_order")]

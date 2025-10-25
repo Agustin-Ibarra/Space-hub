@@ -11,6 +11,7 @@ public class Item
   public required string item_name { get; set; }
   public required string item_description { get; set; }
   public required string path_image { get; set; }
+  [Column(TypeName = "decimal(8,2)")]
   public decimal unit_price { get; set; }
   public int stock { get; set; }
 
