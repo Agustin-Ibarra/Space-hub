@@ -82,7 +82,6 @@ fetch("/api/cart/items")
 $body.addEventListener("click", (e) => {
   if (e.target.matches(".cart-delete-item-btn")) {
     let cartToDelete;
-    let index;
     e.target.childNodes[1].classList.add("hidden");
     e.target.childNodes[2].classList.remove("hidden");
     cartList.forEach(cart => {
@@ -98,22 +97,7 @@ $body.addEventListener("click", (e) => {
     })
       .then((response) => {
         if (response.status === 204) {
-          $cartList.removeChild(e.target.parentNode)
-          let quantity = 0;
-          let subtotal = 0;
-          let total = 0;
-          itemsList.splice(index, 1);
-          itemsList.forEach(item => {
-            quantity += item.quantity;
-            total += item.unitPrice * item.quantity;
-            subtotal += item.unitPrice * item.quantity
-          });
-          if(itemsList.length === 0){
-            $emptyCart.classList.remove("hidden");
-          }
-          $totalResumen.textContent = `Total: $${Number(total).toFixed(2)}`;
-          $subtotalResumen.textContent = `Subtotal: $${Number(subtotal).toFixed(2)}`;
-          $quantityResumen.textContent = `Articulos: ${quantity}`;
+          window.location.reload();
         }
       })
       .catch((error) => {
