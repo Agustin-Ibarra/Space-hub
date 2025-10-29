@@ -1,12 +1,14 @@
 const $body = document.querySelector("body");
+const $spinner = document.querySelector(".mini-spinner");
 
 $body.addEventListener("click",(e)=>{
-  console.log(e.target);
   if(e.target.matches(".send-form")){
     e.preventDefault();
+    const $error = document.querySelector(".error-form");
+    $error.textContent = "";
+    $spinner.classList.remove("hidden");
     const $username = document.getElementById("username");
     const $password = document.getElementById("password");
-    console.log($username.value,$password.value);
     fetch("/api/login",{
       method:"POST",
       headers:{"Content-Type":"application/json"},
@@ -17,16 +19,23 @@ $body.addEventListener("click",(e)=>{
     })
     .then(async(response)=>{
       if(response.status >= 400){
-        const $error = document.querySelector(".error-form");
         const errorMessage = await response.json();
         $error.textContent = errorMessage.error
       }
       else if(response.status === 200){
-        console.log("authorized");
+        if(sessionStorage.getItem("redirect")){
+          window.location.href = sessionStorage.getItem("redirect");
+        }
+        else{
+          window.location.href = "/";
+        }
       }
     })
     .catch((error)=>{
       console.log(error)
+    })
+    .finally(()=>{
+      $spinner.classList.add("hidden");
     })
   }
 })

@@ -25,9 +25,9 @@
 }
 
 body {
-  background-image: url(../images/examples/gradient-2.jpg);
+  background-image: url(../images/examples/gradient-1.jpg);
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: top;
   background-size: cover;
 }
 

@@ -1,38 +1,33 @@
 header{
   position: relative;
-  background-color: #131b25;
 }
 
-body {
-  background-color: #e2dbbb38;
-}
 .main {
-  width: 1200px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   margin-top: 3rem;
-  padding: 4rem 1rem;
-  background-color: #ffffff;
+  gap: 2rem;
 }
 
 .form-img {
-  width: 600px;
-  height: 400px;
-  background-color: #2a5d69;
-  padding: 1.5rem;
+  width: 60%;
+  padding: 2rem 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   border-radius: 10px;
+  gap: 2rem;
+  text-align: center;
 }
 .title{
-  font-size: 45px;
+  font-size: 40px;
   font-weight: 600;
 }
 .subtitle{
-  font-size: 30px;
+  font-size: 20px;
 }
 
 form {
@@ -42,7 +37,7 @@ form {
   width: 450px;
   padding: 2rem;
   border-radius: 10px;
-  border: #58585834 2px solid;
+  border: #ffffff 2px solid;
   text-align: center;
   background-color: #7070700c;
 }
@@ -50,22 +45,20 @@ form {
   text-align: center;
   font-size: 18px;
   font-weight: 600;
-  color: #131b25;
 }
 
 input {
   background: none;
   border: none;
-  background-color: #00000015;
+  background-color: #ffffff23;
   padding: 10px;
   border-radius: 10px;
   font-size: 16px;
   text-align: center;
-  color: #131b25;
   outline: none ;
 }
 input::placeholder{
-  color: #646464;
+  color: #cecece;
 }
 
 button {
@@ -77,16 +70,41 @@ button {
   border-radius: 10px;
   font-size: 16px;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
 
 .redirect-form-text{
   font-weight: 600;
-  color: #131b25;
 }
 .redirect-link{
-  color: #2a5d69;
+  color: #f33535;
   font-weight: 600;
 }
 .error-form{
   color: #ff0000;
+}
+
+.mini-spinner{
+  padding: 5px;
+  border: #ffffff 3px solid;
+  border-bottom: #ffffff00 3px solid;
+  border-radius: 50px;
+  animation: loader 1000ms linear infinite;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.hidden{
+  display: none;
 }
