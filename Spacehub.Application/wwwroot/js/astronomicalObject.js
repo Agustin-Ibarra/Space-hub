@@ -23,7 +23,7 @@ const generateObjects = function () {
         $textDiv.setAttribute("class", "content-list-item-text-div");
         $title.setAttribute("class", "content-title");
         $category.setAttribute("class","category");
-        $link.setAttribute("class", "article-content-link");
+        $link.setAttribute("class", "item-link");
         $link.setAttribute("href", "/astronomical_objects/info");
         $link.setAttribute("id",astronomicalObject.id);
         $li.appendChild($imageDiv);

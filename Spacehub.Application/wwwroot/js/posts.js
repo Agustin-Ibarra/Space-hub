@@ -30,7 +30,7 @@ fetch(`/api/posts/${offset}`)
       $title.textContent = post.title;
       $category.setAttribute("class","category");
       $category.textContent = `Categoria: ${post.category}`;
-      $link.setAttribute("class","article-content-link");
+      $link.setAttribute("class","item-link");
       $link.setAttribute("id",post.id);
       $link.setAttribute("href","/posts/info");
       $link.textContent = "Ver notitcia completa";

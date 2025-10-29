@@ -1,6 +1,6 @@
 header {
   position: relative;
-  background-color: #131b25;
+  /* background-color: #131b25; */
 }
 
 .main {
@@ -11,7 +11,8 @@ header {
 
 .content-container {
   width: 1200px;
-  background-color: #ffffffea;
+  background-color: #ffffff;
+  border-radius: 10px;
 }
 
 .content-container .material-symbols-outlined {

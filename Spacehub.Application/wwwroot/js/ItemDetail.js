@@ -26,10 +26,6 @@ fetch(`/api/items/detail/${sessionStorage.getItem("idItem")}`)
 })
 
 $body.addEventListener("click",(e)=>{
-  $miniSpinner = document.querySelector(".mini-spinner");
-  $addCartIcon = document.querySelector(".add-cart-icon");
-  $miniSpinner.classList.remove("hidden");
-  $addCartIcon.classList.add("hidden");
   if(e.target.matches(".add-btn")){
     if(quantity < 5 && quantity < Number($itemStock.textContent.replace("Stock disponible: ",""))){
       quantity ++;
@@ -43,6 +39,10 @@ $body.addEventListener("click",(e)=>{
     }
   }
   else if(e.target.matches(".item-detail-add-cart-btn") || e.target.matches(".add-cart-icon-btn")){
+    $miniSpinner = document.querySelector(".mini-spinner");
+    $addCartIcon = document.querySelector(".add-cart-icon");
+    $miniSpinner.classList.remove("hidden");
+    $addCartIcon.classList.add("hidden");
     const itemObject = {
       idItem : $itemImage.id,
       quantity : quantity
