@@ -19,5 +19,5 @@ public class PurchaseDetail
   public PurchaseOrder? PurchaseOrderFk { get; set; }
 
   [ForeignKey("id_item")]
-  public ICollection<Item>? ItemReference { get; set; }
+  public Item? ItemReferenceFk { get; set; }
 }

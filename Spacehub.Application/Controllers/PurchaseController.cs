@@ -75,4 +75,21 @@ public class PurchaseControllers : Controller
       }
     }
   }
+
+  [Authorize]
+  [HttpGet]
+  [Route("/api/purchase")]
+  public async Task<IActionResult> GetPurchaseByUser()
+  {
+    int idUser = Convert.ToInt16(User.FindFirstValue(ClaimTypes.NameIdentifier));
+    var purchaseList = await _purchaseRepository.GetPurchaseOrder(idUser);
+    if (purchaseList != null)
+    {
+      return Ok(purchaseList);
+    }
+    else
+    {
+      return NotFound(new {error = "El usuario no tiene ordenes de compras"});
+    }
+  }
 }
