@@ -21,7 +21,6 @@ fetch(`/api/astronomical_objects/suggestion/${sessionStorage.getItem("id")}`)
 .then(async(response)=>{
   if(response.status === 200){
     const suggestions = await response.json();
-    console.log(suggestions);
     const $list = document.querySelector(".object-sub-list");
     suggestions.forEach(suggestion => {
       const $item = document.createElement("li");

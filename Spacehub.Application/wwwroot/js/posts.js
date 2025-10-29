@@ -43,7 +43,7 @@ fetch(`/api/posts/${offset}`)
 })
 
 $body.addEventListener("click",(e)=>{
-  if(e.target.matches(".article-content-link")){
+  if(e.target.matches(".item-link")){
     sessionStorage.setItem("id",e.target.id);
   }
 })
