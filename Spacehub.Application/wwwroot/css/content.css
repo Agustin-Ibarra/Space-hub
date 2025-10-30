@@ -66,10 +66,10 @@ h3 {
 }
 
 .content-title {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
   color: #36393d;
-  height: 69px;
+  height: 50px;
 }
 
 .list-item {
@@ -397,12 +397,13 @@ h3 {
 }
 
 .category {
-  border: #dbdbdb 2px solid;
+  /* border: #dbdbdb 2px solid; */
   border-radius: 5px;
-  color: #7e7d74;
-  padding: 5px;
+  color: #72716a;
+  padding: 8px;
   width: max-content;
-  background-color: #f8f8f8;
+  background-color: #f0f0f0;
+  font-size: 16px;
 }
 
 img {
@@ -419,7 +420,7 @@ aside {
 
 .aside-title {
   color: #131b25;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 600;
   padding-bottom: 5px;
   border-bottom: #131b25 2px solid;
@@ -428,7 +429,7 @@ aside {
 }
 
 .object-info-title {
-  font-size: 30px;
+  font-size: 22px;
   font-weight: 600;
   color: #131b25;
 }
@@ -438,6 +439,9 @@ aside {
 .created-at {
   font-size: 20px;
   color: #131b25;
+}
+.object-info-text{
+  font-size: 18px;
 }
 
 .sub-title-post {
@@ -465,7 +469,7 @@ aside {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  border-bottom: #131b25 2px solid;
+  border-bottom: #cecece 2px solid;
   padding-bottom: 1rem;
 }
 
@@ -479,7 +483,7 @@ aside {
 }
 
 .object-sub-list-title {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
   color: #131b25;
 }
