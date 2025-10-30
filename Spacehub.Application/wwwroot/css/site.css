@@ -25,10 +25,7 @@
 }
 
 body {
-  background-image: url(../images/examples/gradient.png);
-  background-repeat: no-repeat;
-  background-position: bottom;
-  background-size: cover;
+  background: linear-gradient(#111729, #2f6f7a, #1c0e2b);
 }
 
 .home {
@@ -162,7 +159,7 @@ h3 {
   width: 100%;
   padding: 2rem;
   border-radius: 15px;
-  background-color: #69dce02d;
+  background-color: #0000003a;
 }
 
 .article-content-text {
@@ -190,7 +187,7 @@ h3 {
 }
 
 .article-content-link {
-  background-color: #1d9397;
+  background-color: #f33535;
   font-size: 16px;
   font-weight: 600;
   text-decoration: none;
@@ -202,7 +199,7 @@ h3 {
   transition: all .4s;
 }
 .article-content-link:hover{
-  background-color: #1a8386;
+  background-color: #db2d2d;
 }
 
 .text-section {

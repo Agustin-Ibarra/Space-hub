@@ -1,6 +1,5 @@
 header {
   position: relative;
-  /* background-color: #131b25; */
 }
 
 .main {
@@ -11,6 +10,7 @@ header {
 
 .content-container {
   width: 1200px;
+  min-height: 60vh;
   background-color: #ffffff;
   border-radius: 10px;
 }
@@ -495,29 +495,29 @@ aside {
   border-radius: 10px;
   padding: 2rem;
   width: 70%;
-  min-height: 40vh;
+  min-height: 50vh;
   justify-content: space-between;
-  background-color: #8b8b8b1c;
+  background-color: #ffffff1c;
 }
 
 .chat-content-div {
   border-radius: 10px;
-  background-color: #131b2523;
+  background-color: #ffffff;
   padding: 1rem;
   display: none;
 }
 
 .title-chat {
-  font-size: 30px;
+  font-size: 40px;
   text-align: center;
-  color: #5b6179;
+  color: #dadada;
 }
 
 .input-chat-div {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #c2bfbf86;
+  background-color: #ffffff27;
   padding: 6px 18px;
   border-radius: 10px;
 }
@@ -533,7 +533,7 @@ aside {
 }
 
 .input-chat::placeholder {
-  color: #7e7d74;
+  color: #cecece;
   font-weight: 100;
 }
 
@@ -544,7 +544,7 @@ aside {
 }
 
 .send-chat-btn .material-symbols-outlined {
-  color: #64635b;
+  color: #cecece;
 }
 
 .mini-spinner, .medium-spinner{
