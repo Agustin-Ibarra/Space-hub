@@ -7,14 +7,22 @@ using SpaceHub.Application.Repository;
 
 namespace SpaceHub.Application.Controllers;
 
-public class PurchaseControllers : Controller
+public class PurchaseController : Controller
 {
   private readonly IItemRespotory _itemRepository;
   private readonly IPurchaseRepository _purchaseRepository;
-  public PurchaseControllers(IItemRespotory itemRespotory, IPurchaseRepository purchaseRepository)
+  public PurchaseController(IItemRespotory itemRespotory, IPurchaseRepository purchaseRepository)
   {
     _itemRepository = itemRespotory;
     _purchaseRepository = purchaseRepository;
+  }
+
+  [Authorize]
+  [HttpGet]
+  [Route("/purchase")]
+  public IActionResult Purchase()
+  {
+    return View();
   }
 
   [Authorize]
