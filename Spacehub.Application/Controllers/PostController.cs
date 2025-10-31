@@ -31,6 +31,7 @@ public class PostController : Controller
   [Route("/api/posts/{offset}")]
   public async Task<IActionResult> PostApi(int offset)
   {
+    Console.WriteLine(offset);
     try
     {
       var posts = await _postRepository.GetPostsList(offset);

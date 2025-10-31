@@ -32,7 +32,7 @@ public class ItemRepository : IItemRespotory
       IdItem = item.id_item,
       ItemUnitPrice = item.unit_price
     })
-    .Take(10)
+    .Take(12)
     .Skip(offset)
     .ToListAsync();
   }

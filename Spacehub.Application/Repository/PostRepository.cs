@@ -31,8 +31,8 @@ public class PostRepository : IpostRepository
       Title = post.title,
       Id = post.id_post
     })
-    .Take(10)
     .Skip(offset)
+    .Take(12)
     .ToListAsync();
   }
 

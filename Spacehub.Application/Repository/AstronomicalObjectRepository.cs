@@ -31,7 +31,7 @@ public class AstronomicalObjectRepository : IAstronomicalObjectRepository
       Category = astronomical.CategoryFk != null ? astronomical.CategoryFk.category : "Sin categoria"
     })
     .Skip(offset)
-    .Take(10)
+    .Take(12)
     .ToListAsync();
   }
 
