@@ -1,0 +1,87 @@
+@{
+  ViewData["Title"] = "Space Hub | Publicaciones";
+  ViewData["link1"] = "Pagina Principal";
+  ViewData["path1"] = "/";
+  ViewData["icon1"] = "home";
+  ViewData["link2"] = "Objetos Astronómicos";
+  ViewData["path2"] = "/astronomical_objects";
+  ViewData["icon2"] = "planet";
+  ViewData["link3"] = "Carrito Espacial";
+  ViewData["path3"] = "/cart";
+  ViewData["icon3"] = "shopping_cart";
+}
+
+<link rel="stylesheet" href="~/css/content.css">
+
+<section class="main">
+  <section class="content-container">
+    <section class="title-container">
+      <h3>Tienda Espacial <span class="material-symbols-outlined">shopping_bag</span></h3>
+    </section>
+    <section class="item-section-info">
+      <p class="roboto-content-text item-section-info-text">
+        ¿Listo para llevar la pasión por el espacio a cada rincón de tu rutina? Te invitamos a descubrir nuestros tres
+        catálogos estelares.
+      </p>
+    </section>
+    <ul class="item-section-list">
+      <li class="item-section-list-item">
+        <article class="item-article-card">
+          <div class="item-article-section-card-img-div">
+            <img src="~/images/items/gorra-2.png" alt="">
+          </div>
+          <div class="item-article-section-card-text-div">
+            <h3 class="roboto-content-text item-section-title">Gorras Estelares</h3>
+            <p class="item-article-section-card-text roboto-content-text">
+              Gorras con diseños cósmicos que te protegen del sol… y del vacío interestelar
+            </p>
+            <a href="/items" class="article-content-link roboto-content-text" id="">
+              Ver Catalogo
+              <span class="material-symbols-outlined article-content-link-icon">
+                arrow_forward
+              </span>
+            </a>
+          </div>
+        </article>
+      </li>
+      <li class="item-section-list-item">
+        <article class="item-article-card">
+          <div class="item-article-section-card-img-div">
+            <img src="~/images/items/tazas-1.png" alt="">
+          </div>
+          <div class="item-article-section-card-text-div">
+            <h3 class="roboto-content-text item-section-title">Tazas Galacticas</h3>
+            <p class="item-article-section-card-text roboto-content-text">
+              Tazas que convierten cada café en una misión espacial
+            </p>
+            <a href="/items" class="article-content-link roboto-content-text" id="">
+              Ver Catalogo
+              <span class="material-symbols-outlined article-content-link-icon">
+                arrow_forward
+              </span>
+            </a>
+          </div>
+        </article>
+      </li>
+      <li class="item-section-list-item">
+        <article class="item-article-card">
+          <div class="item-article-section-card-img-div">
+            <img src="~/images/items/llavero-1.png" alt="">
+          </div>
+          <div class="item-article-section-card-text-div">
+            <h3 class="roboto-content-text item-section-title">Llaveros Espaciales</h3>
+            <p class="item-article-section-card-text roboto-content-text">
+              Llaveros que capturan constelaciones y planetas en miniatura
+            </p>
+            <a href="/items" class="article-content-link roboto-content-text" id="">
+              Ver Catalogo
+              <span class="material-symbols-outlined article-content-link-icon">
+                arrow_forward
+              </span>
+            </a>
+          </div>
+        </article>
+      </li>
+    </ul>
+  </section>
+</section>

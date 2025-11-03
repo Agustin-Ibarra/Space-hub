@@ -14,6 +14,13 @@ public class ItemController : Controller
   }
 
   [HttpGet]
+  [Route("/items/section")]
+  public IActionResult ItemSection()
+  {
+    return View();
+  }
+
+  [HttpGet]
   [Route("/items")]
   public IActionResult Item()
   {

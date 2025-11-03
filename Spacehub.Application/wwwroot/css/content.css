@@ -137,13 +137,14 @@ h3 {
   background-color: #db2d2d;
 }
 
-.open-chat-btn{
+.open-chat-btn {
   display: flex;
   align-items: center;
   gap: 5px;
   margin: 2rem;
 }
-.open-chat-btn .material-symbols-outlined{
+
+.open-chat-btn .material-symbols-outlined {
   color: #ffffff;
   font-size: 20px;
 }
@@ -221,6 +222,68 @@ h3 {
   font-weight: 600;
 }
 
+/* ITEM SECTION STYLE */
+.item-section-info {
+  width: 90%;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.item-section-info-text {
+  color: #131b25;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.item-section-list {
+  list-style: none;
+  margin: 2rem auto;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.item-section-list-item {
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0px 0px 6px #7e7e7e;
+  width: 70%;
+}
+
+.item-article-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.item-section-title {
+  font-weight: 600;
+  border-bottom: #f33535 2px solid;
+  padding-bottom: 5px;
+}
+
+.item-article-section-card-img-div {
+  width: 25%;
+}
+
+.item-article-section-card-img-div img {
+  width: 100%;
+}
+
+.item-article-section-card-text-div {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.item-article-section-card-text {
+  color: #03131b;
+  font-size: 20px;
+  width: 90%;
+}
+
 /* CART SECTION STYLE */
 
 .item-detail-add-cart-btn {
@@ -264,10 +327,10 @@ h3 {
   width: 750px;
 }
 
-.cart-empty-text{
+.cart-empty-text {
   color: #7c7c7c;
   font-weight: 600;
-  font-size:18px;
+  font-size: 18px;
 }
 
 .cart-item-description-div {
@@ -296,6 +359,11 @@ h3 {
   font-weight: 600;
 }
 
+.article-content-link .article-content-link-icon{
+  color: #ffffff;
+  font-size: 22px;
+}
+
 .chat-link,
 .cart-delete-item-btn,
 .cart-pay-btn {
@@ -311,9 +379,11 @@ h3 {
   cursor: pointer;
   gap: 5px;
 }
-.cart-delete-item-btn{
+
+.cart-delete-item-btn {
   width: max-content;
 }
+
 .cart-delete-item-btn .material-symbols-outlined {
   color: #ffffff;
   font-size: 20px;
@@ -396,11 +466,13 @@ h3 {
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
+
 @keyframes shimmer {
-  from{
+  from {
     background-position: -200% 0;
   }
-  to{
+
+  to {
     background-position: 200% 0;
   }
 }
@@ -452,7 +524,8 @@ aside {
   font-size: 20px;
   color: #131b25;
 }
-.object-info-text{
+
+.object-info-text {
   font-size: 18px;
 }
 
@@ -574,7 +647,7 @@ aside {
 
 /* PURCHASE SECTION STYLE */
 
-.purchase-section{
+.purchase-section {
   margin: 3rem auto;
   width: 60%;
   text-align: center;
@@ -582,16 +655,19 @@ aside {
   flex-direction: column;
   gap: 1.5rem;
 }
-.purchase-title{
+
+.purchase-title {
   color: #03131b;
   font-size: 22px;
   font-weight: 600;
 }
-.purchase-subtitle{
+
+.purchase-subtitle {
   color: #03131b;
   font-size: 18px;
 }
-.purchase-article{
+
+.purchase-article {
   border: #a3a3a3 2px solid;
   margin: 2rem auto;
   width: 350px;
@@ -601,23 +677,27 @@ aside {
   padding: 1rem;
   text-align: start;
 }
-.purchase-data-text{
+
+.purchase-data-text {
   color: #7c7c7c;
   font-size: 18px;
 }
-.purchase-subtotal{
+
+.purchase-subtotal {
   color: #7c7c7c;
   font-size: 18px;
   font-weight: 600;
 }
-.purchase-total{
+
+.purchase-total {
   color: #7c7c7c;
   font-size: 22px;
   font-weight: 700;
   border-top: 2px #7c7c7c dashed;
   padding: 8px 0;
 }
-.purchase-suggestions{
+
+.purchase-suggestions {
   background-color: #f3f3f3;
   color: #7c7c7c;
   padding: 1rem;
@@ -625,7 +705,8 @@ aside {
 
 /* UTILS SECTIOL STYLE */
 
-.mini-spinner, .medium-spinner{
+.mini-spinner,
+.medium-spinner {
   padding: 5px;
   border: #ffffff 3px solid;
   border-bottom: #ffffff00 3px solid;
@@ -633,14 +714,14 @@ aside {
   animation: loader 1000ms linear infinite;
 }
 
-.medium-spinner{
+.medium-spinner {
   padding: 15px;
   border: #00000034 4px solid;
   border-bottom: #ffffff00 4px solid;
   position: absolute;
 }
 
-.load-more{
+.load-more {
   margin: 2rem auto;
   display: flex;
   align-items: center;
@@ -655,7 +736,8 @@ aside {
   cursor: pointer;
   transition: all .5s;
 }
-.load-more:hover{
+
+.load-more:hover {
   background-color: #db2d2d;
 }
 
@@ -669,6 +751,6 @@ aside {
   }
 }
 
-.hidden{
+.hidden {
   display: none;
 }

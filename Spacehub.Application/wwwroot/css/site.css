@@ -32,13 +32,15 @@ body {
   display: flex;
   flex-direction: column;
 }
-header{
+
+header {
   position: absolute;
   display: flex;
   justify-content: center;
   width: 100%;
 }
-.header-div{
+
+.header-div {
   display: flex;
   width: 1200px;
   justify-content: space-around;
@@ -97,7 +99,7 @@ h1 {
   border-bottom: #ffffff 2px solid;
 }
 
-.nav-link .material-symbols-outlined{
+.nav-link .material-symbols-outlined {
   font-size: 22px;
 }
 
@@ -195,12 +197,15 @@ h3 {
   text-decoration: none;
   padding: 10px 30px;
   border-radius: 50px;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 250px;
-  text-align: center;
+  gap: 5px;
   transition: all .4s;
 }
-.article-content-link:hover{
+
+.article-content-link:hover {
   background-color: #db2d2d;
 }
 
@@ -223,7 +228,8 @@ h3 {
   align-items: center;
   gap: 5px;
 }
-.section-title .material-symbols-outlined{
+
+.section-title .material-symbols-outlined {
   font-size: 28px;
 }
 
@@ -251,7 +257,7 @@ h3 {
   font-weight: 600;
 }
 
-.item-section{
+.item-section {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -260,7 +266,7 @@ h3 {
   height: 100vh;
 }
 
-.item-section-content{
+.item-section-content {
   width: 600px;
   height: 450px;
   background-image: url(../images/items/gorra-1.png);
@@ -270,7 +276,7 @@ h3 {
   border-radius: 8px;
 }
 
-.item-text-div{
+.item-text-div {
   background-color: #00000056;
   height: 450px;
   display: flex;
@@ -281,13 +287,14 @@ h3 {
   border-radius: 8px;
 }
 
-.item-content-text-article{
+.item-content-text-article {
   width: 500px;
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
-.item-text{
+
+.item-text {
   color: #ffffff;
 }
 
