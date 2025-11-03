@@ -33,8 +33,8 @@ public class ItemRepository : IItemRespotory
       IdItem = item.id_item,
       ItemUnitPrice = item.unit_price
     })
-    .Take(12)
     .Skip(offset)
+    .Take(12)
     .ToListAsync();
   }
 

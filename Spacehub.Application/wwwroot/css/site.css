@@ -25,7 +25,7 @@
 }
 
 body {
-  background: linear-gradient(#090135, #28636d, #2c0642);
+  background: linear-gradient(#090135, #28576d, #2c0642);
 }
 
 .home {
@@ -51,10 +51,10 @@ header {
   width: 100%;
   height: 100vh;
   display: flex;
+  align-items: center;
 }
 
 .cover {
-  height: 100vh;
   width: 100%;
 }
 
@@ -216,7 +216,6 @@ h3 {
   gap: 2rem;
   background-color: #00000065;
   width: 100%;
-  height: 100%;
   justify-content: end;
   padding: 2rem;
 }

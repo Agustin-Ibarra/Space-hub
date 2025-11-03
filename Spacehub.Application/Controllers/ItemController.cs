@@ -43,7 +43,7 @@ public class ItemController : Controller
       var items = await _itemRepository.GetListItems(offset, idCategory);
       if (items.Count < 1)
       {
-        return BadRequest(new { error = $"no existe la categoria {idCategory}" });
+        return NotFound(new { error = $"no existe la categoria {idCategory}" });
 
       }
       else
