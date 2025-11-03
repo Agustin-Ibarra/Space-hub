@@ -25,7 +25,7 @@
 }
 
 body {
-  background: linear-gradient(#090135, #28576d, #2c0642);
+  background: linear-gradient(#080016, #010038, #2c0642);
 }
 
 .home {
@@ -115,6 +115,7 @@ h1 {
 h3 {
   font-size: 60px;
   width: 800px;
+  color: #00ffff;
 }
 
 .promise {
@@ -162,8 +163,9 @@ h3 {
   width: 100%;
   padding: 2rem;
   border-radius: 15px;
-  background-color: #0000001e;
-  box-shadow: #181138 0px 0px 7px 2px;
+  border: #00c0c0 2px solid;
+  /* background-color: #0000001e; */
+  /* box-shadow: #0c332d 0px 0px 7px 2px; */
 }
 
 .article-content-text {
