@@ -6,7 +6,7 @@ namespace SpaceHub.Application.Repository;
 
 public interface IItemRespotory
 {
-  Task<List<ItemDto>> GetListItems(int offset);
+  Task<List<ItemDto>> GetListItems(int offset, int idCategory);
   Task<ItemDetailDto?> GetItemDetail(int idItem);
   Task<bool> UpdateStock(int idItem, int quantity);
   Task RestoreStock(int idItem, int quantity);
@@ -21,10 +21,11 @@ public class ItemRepository : IItemRespotory
     _appDbContext = appDbContext;
   }
 
-  public async Task<List<ItemDto>> GetListItems(int offset)
+  public async Task<List<ItemDto>> GetListItems(int offset, int idCategory)
   {
     return await _appDbContext.Items
     .OrderBy(item => item.id_item)
+    .Where(items => items.id_category == idCategory)
     .Select(item => new ItemDto
     {
       ItemImage = item.path_image,
@@ -97,4 +98,5 @@ public class ItemRepository : IItemRespotory
     .FirstOrDefaultAsync();
     return itemPrice;
   }
+
 }

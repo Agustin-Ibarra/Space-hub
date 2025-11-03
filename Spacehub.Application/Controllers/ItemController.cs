@@ -35,13 +35,21 @@ public class ItemController : Controller
   }
 
   [HttpGet]
-  [Route("/api/items/{offset}")]
-  public async Task<IActionResult> ApiItemsList(int offset)
+  [Route("/api/items/{offset}/{idCategory}")]
+  public async Task<IActionResult> ApiItemsList(int offset, int idCategory)
   {
     try
     {
-      var items = await _itemRepository.GetListItems(offset);
-      return Ok(items);
+      var items = await _itemRepository.GetListItems(offset, idCategory);
+      if (items.Count < 1)
+      {
+        return BadRequest(new { error = $"no existe la categoria {idCategory}" });
+
+      }
+      else
+      {
+        return Ok(items);
+      }
     }
     catch (Exception)
     {
@@ -82,23 +90,25 @@ public class ItemController : Controller
         foreach (var item in itemsList.Items)
         {
           bool result = await _itemRepository.UpdateStock(item.IdItem, item.Quantity);
-          if(result != true)
+          if (result != true)
           {
             // si la consulta retorna false no se pudo actualizar el stock al reservar el articulo
             // se agrega la informacion del articulo que no pudo ser actualizado en la lista
-            ItemsRejected.Add(item); 
+            ItemsRejected.Add(item);
           }
         }
-        if(ItemsRejected.Count == 0){
+        if (ItemsRejected.Count == 0)
+        {
           // si la lista esta vacia indica que no ocurrieron errores al actualizar stock
-          return Ok(new {message = "Articulos reservados"});
+          return Ok(new { message = "Articulos reservados" });
         }
-        else{
+        else
+        {
           // en caso contrario se recorre la lista para restaurar stock original
           foreach (var item in itemsList.Items)
           {
             int iter = 0;
-            if(item.IdItem != ItemsRejected[iter].IdItem) 
+            if (item.IdItem != ItemsRejected[iter].IdItem)
             {
               // se restaura el stock solo a los articulos que no fueron rechazados
               await _itemRepository.RestoreStock(item.IdItem, item.Quantity);
