@@ -41,7 +41,7 @@ public class PurchaseController : Controller
       decimal purchaseSubtotal = 0;
       try
       {
-        foreach (var item in items.Items) // en este bucle se obtiene el total y subtotal
+        foreach (var item in items.ItemsList) // en este bucle se obtiene el total y subtotal
         {
           var itemPrice = await _itemRepository.GetItemPrice(item.IdItem);
           if (itemPrice != null)
@@ -62,7 +62,7 @@ public class PurchaseController : Controller
           total = purchaseTotal
         };
         var purchaseOrder = await _purchaseRepository.CreatePurchaseOrder(purchase);
-        foreach (var item in items.Items) // en este bucle se crea el detalle de orden de compra
+        foreach (var item in items.ItemsList) // en este bucle se crea el detalle de orden de compra
         {
           var itemPrice = await _itemRepository.GetItemPrice(item.IdItem); // obtener el precio unitario del articulo
           var purchaseDetail = new PurchaseDetail

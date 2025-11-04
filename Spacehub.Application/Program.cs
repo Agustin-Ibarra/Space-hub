@@ -3,8 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Spacehub.Application.Repository;
 using SpaceHub.Application.Data;
 using SpaceHub.Application.Repository;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
+
+StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 
 string? stringConnection = builder.Configuration.GetConnectionString("DefaultConnection");
 

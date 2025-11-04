@@ -87,7 +87,7 @@ public class ItemController : Controller
       List<ItemReserveDto> ItemsRejected = []; // lista de articulos rechazados por stock insuficiente
       try
       {
-        foreach (var item in itemsList.Items)
+        foreach (var item in itemsList.ItemsList)
         {
           bool result = await _itemRepository.UpdateStock(item.IdItem, item.Quantity);
           if (result != true)
@@ -105,7 +105,7 @@ public class ItemController : Controller
         else
         {
           // en caso contrario se recorre la lista para restaurar stock original
-          foreach (var item in itemsList.Items)
+          foreach (var item in itemsList.ItemsList)
           {
             int iter = 0;
             if (item.IdItem != ItemsRejected[iter].IdItem)

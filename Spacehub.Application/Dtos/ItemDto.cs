@@ -32,7 +32,7 @@ public class ItemReserveDto
 public class ItemsListDto
 {
   [MinLength(1, ErrorMessage = "La lista no contiene articulos")]
-  public required List<ItemReserveDto> Items { get; set; }
+  public required List<ItemReserveDto> ItemsList { get; set; }
 }
 
 public class ItemUnitPriceDto

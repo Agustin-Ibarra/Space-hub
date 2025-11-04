@@ -7,6 +7,8 @@ const $totalResumen = document.querySelector(".cart-pay-total");
 const cartList = [];
 let itemsList;
 
+const stripe = Stripe("pk_test_51OmMbwCPAgcnoLpT0U8CaOBQVRL2G1vXk8GKB6xZxbUTUF2uHMAZjRv37F7JBUSgF9WNJQQ4TfBOTcizQcwEswLN00icpSllq2");
+
 fetch("/api/cart/items")
   .then(async (response) => {
     if (response.status === 200) {
@@ -108,4 +110,25 @@ $body.addEventListener("click", (e) => {
         e.target.childNodes[2].classList.add("hidden");
       });
   }
-})
+  else if (e.target.matches(".cart-pay-btn")) {
+    e.target.childNodes[1].classList.add("hidden");
+    e.target.childNodes[3].classList.remove("hidden");
+    fetch("/api/payment", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ itemsList: cartList })
+    })
+      .then(async (response) => {
+        const session = await response.json();
+        console.log(session);
+        await stripe.redirectToCheckout({ sessionId: session.idSession });
+      })
+      .catch((error) => {
+        console.error("Error al iniciar el pago:", error);
+      })
+      .finally(() => {
+        e.target.childNodes[1].classList.remove("hidden");
+        e.target.childNodes[3].classList.add("hidden");
+      });
+  }
+});
