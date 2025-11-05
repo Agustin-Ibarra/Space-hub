@@ -9,7 +9,7 @@ let itemsList;
 
 const stripe = Stripe("pk_test_51OmMbwCPAgcnoLpT0U8CaOBQVRL2G1vXk8GKB6xZxbUTUF2uHMAZjRv37F7JBUSgF9WNJQQ4TfBOTcizQcwEswLN00icpSllq2");
 
-fetch("/api/cart/items")
+fetch("/api/cart")
   .then(async (response) => {
     if (response.status === 200) {
       let quantity = 0;
@@ -92,7 +92,7 @@ $body.addEventListener("click", (e) => {
         index = cartList.indexOf(cartToDelete)
       }
     });
-    fetch("/api/cart/items", {
+    fetch("/api/cart", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(cartToDelete)

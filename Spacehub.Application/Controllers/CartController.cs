@@ -56,7 +56,7 @@ public class CartController : Controller
 
   [Authorize]
   [HttpGet]
-  [Route("/api/cart/items")]
+  [Route("/api/cart")]
   public async Task<IActionResult> ApiCartItems()
   {
     try
@@ -80,7 +80,7 @@ public class CartController : Controller
 
   [Authorize]
   [HttpDelete]
-  [Route("/api/cart/items")]
+  [Route("/api/cart")]
   public async Task<IActionResult> ApiDeleteCart([FromBody] CartDto cartDto)
   {
     var cart = new Cart

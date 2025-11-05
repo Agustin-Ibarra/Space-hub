@@ -37,45 +37,57 @@ public class PurchaseController : Controller
     }
     else
     {
-      decimal purchaseTotal = 0;
-      decimal purchaseSubtotal = 0;
+      decimal purchaseOrderTotal = 0;
       try
       {
         foreach (var item in items.ItemsList) // en este bucle se obtiene el total y subtotal
         {
-          var itemPrice = await _itemRepository.GetItemPrice(item.IdItem);
+          var itemPrice = await _itemRepository.GetItemPrice(item.IdItem); // obtener el precio de cada articulo
           if (itemPrice != null)
           {
-            purchaseTotal += itemPrice.UnitPrice * item.Quantity; // los descuentos o recargos se agregan aqui
-            purchaseSubtotal += itemPrice.UnitPrice * item.Quantity;
+            purchaseOrderTotal += itemPrice.UnitPrice * item.Quantity; // los descuentos o recargos se agregan aqui
           }
           else
           {
             return BadRequest(new { error = $"No existe el articulo con id: {item.IdItem}" });
           }
         }
-        var purchase = new PurchaseOrder
+
+        var purchaseOrder = new PurchaseOrder // asignar valores al modelo de orden de compra
         {
           seller = "Space Hub",
           id_customer = Convert.ToInt16(User.FindFirstValue(ClaimTypes.NameIdentifier)),
           purchase_date = DateTime.Now,
-          total = purchaseTotal
+          total = purchaseOrderTotal
         };
-        var purchaseOrder = await _purchaseRepository.CreatePurchaseOrder(purchase);
-        foreach (var item in items.ItemsList) // en este bucle se crea el detalle de orden de compra
+
+        var purchaseOrdeData = await _purchaseRepository.CreatePurchaseOrder(purchaseOrder); // crear registro en DB
+
+        foreach (var item in items.ItemsList) // en este bucle se crea el detalle de orden de compra por articulo
         {
+          decimal purchaseSubtotal = 0;
           var itemPrice = await _itemRepository.GetItemPrice(item.IdItem); // obtener el precio unitario del articulo
-          var purchaseDetail = new PurchaseDetail
+          if (itemPrice != null)
           {
-            id_item = item.IdItem,
-            id_purchase_order = purchase.id_purchase,
-            quantity = item.Quantity,
-            unit_price = itemPrice != null ? itemPrice.UnitPrice : 0,
-            subtotal = purchaseSubtotal
-          };
-          await _purchaseRepository.CreatePurchaseDetail(purchaseDetail);
+            purchaseSubtotal += itemPrice.UnitPrice * item.Quantity; // calcular el subtotal del detalle de orden de compra
+            var purchaseDetail = new PurchaseDetail // asignar valores al modelo de detalle de orden de compra
+            {
+              id_item = item.IdItem,
+              id_purchase_order = purchaseOrdeData.id_purchase,
+              quantity = item.Quantity,
+              unit_price = itemPrice != null ? itemPrice.UnitPrice : 0,
+              subtotal = purchaseSubtotal
+            };
+            await _purchaseRepository.CreatePurchaseDetail(purchaseDetail); // crear registro en DB
+          }
         }
-        return Created("/api/purchase", new { total = purchaseTotal });
+        
+        return Created("/api/purchase", new
+        {
+          idPurchase = purchaseOrdeData.id_purchase,
+          datePurchase = purchaseOrdeData.purchase_date,
+          totalPurchase = purchaseOrdeData.total
+        });
       }
       catch (Exception)
       {
