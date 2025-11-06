@@ -75,7 +75,7 @@ public class ItemController : Controller
   [Authorize]
   [HttpPatch]
   [Route("/api/items")]
-  public async Task<IActionResult> ReserveItems([FromBody] ItemsListDto itemsList)
+  public async Task<IActionResult> ApiReserveItems([FromBody] ItemsListDto itemsList)
   {
     if (!ModelState.IsValid)
     {

@@ -26,7 +26,7 @@ public class CartController : Controller
   [Authorize]
   [HttpPost]
   [Route("/api/cart")]
-  public async Task<IActionResult> AddItemToCart([FromBody] CartItemDto item)
+  public async Task<IActionResult> ApiAddItemToCart([FromBody] CartItemDto item)
   {
     if (!ModelState.IsValid)
     {

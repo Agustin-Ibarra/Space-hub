@@ -35,7 +35,8 @@ public class UserRepository : IUserRepository
     {
       Password = user.user_password,
       IdUser = user.id_user,
-      Role = user.RoleFk != null ? user.RoleFk.type_role : "sin role"
+      Role = user.RoleFk != null ? user.RoleFk.type_role : "sin role",
+      Fullname = user.fullname
     })
     .FirstOrDefaultAsync();   
 

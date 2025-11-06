@@ -35,6 +35,7 @@ public class LoginDto
 public class UserDto
 {
   public int IdUser { get; set; }
+  public required string Fullname { get; set; }
   public required string Password { get; set; }
   public required string Role {get;set;}
 }

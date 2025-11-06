@@ -40,7 +40,8 @@ public class LoginController : Controller
         {
           var claims = new[] {
             new Claim(ClaimTypes.Role,user.Role),
-            new Claim(ClaimTypes.NameIdentifier,user.IdUser.ToString())
+            new Claim(ClaimTypes.NameIdentifier,user.IdUser.ToString()),
+            new Claim(ClaimTypes.Name,user.Fullname)
           };
           var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
           var principal = new ClaimsPrincipal(identity); 

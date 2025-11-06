@@ -18,7 +18,7 @@ public class PaymentController : Controller
   [Authorize]
   [HttpPost]
   [Route("/api/payment")]
-  public async Task<IActionResult> CreateCheckoutSession([FromBody] ItemsListDto itemsList)
+  public async Task<IActionResult> ApiCreateCheckoutSession([FromBody] ItemsListDto itemsList)
   {
     if (!ModelState.IsValid)
     {

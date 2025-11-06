@@ -28,7 +28,7 @@ public class PurchaseController : Controller
   [Authorize]
   [HttpPost]
   [Route("/api/purchase")]
-  public async Task<IActionResult> CreatePurchase([FromBody] ItemsListDto items)
+  public async Task<IActionResult> ApiCreatePurchase([FromBody] ItemsListDto items)
   {
     if (!ModelState.IsValid)
     {
@@ -81,7 +81,7 @@ public class PurchaseController : Controller
             await _purchaseRepository.CreatePurchaseDetail(purchaseDetail); // crear registro en DB
           }
         }
-        
+
         return Created("/api/purchase", new
         {
           idPurchase = purchaseOrdeData.id_purchase,
@@ -98,8 +98,25 @@ public class PurchaseController : Controller
 
   [Authorize]
   [HttpGet]
+  [Route("/api/purchase/detail/{idPurchaseOrder}")]
+  public async Task<IActionResult> ApiGetPurchaseDetails(int idPurchaseOrder)
+  {
+    var fullname = User.FindFirstValue(ClaimTypes.Name);
+    var purchaseDetail = await _purchaseRepository.GetPurchaseDetail(idPurchaseOrder);
+    if (purchaseDetail.Count > 0)
+    {
+      return Ok(new { purchases = purchaseDetail, userData = fullname });
+    }
+    else
+    {
+      return BadRequest(new { error = $"No existe orden de compra con id: {idPurchaseOrder}" });
+    }
+  }
+
+  [Authorize]
+  [HttpGet]
   [Route("/api/purchase")]
-  public async Task<IActionResult> GetPurchaseByUser()
+  public async Task<IActionResult> ApiGetPurchaseByUser()
   {
     int idUser = Convert.ToInt16(User.FindFirstValue(ClaimTypes.NameIdentifier));
     var purchaseList = await _purchaseRepository.GetPurchaseOrder(idUser);
