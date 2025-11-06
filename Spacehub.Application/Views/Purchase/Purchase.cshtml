@@ -12,27 +12,36 @@
 }
 
 <link rel="stylesheet" href="~/css/content.css">
-<section class="main">    
+<section class="main">
   <section class="content-container">
     <section class="title-container">
-      <h3>Orden de Compra <span class="material-symbols-outlined">order_approve</span></h3>
+      <h3 class="roboto-content-title">Orden de Compra <span class="material-symbols-outlined">order_approve</span></h3>
     </section>
     <section class="purchase-section">
       <p class="purchase-title roboto-content-text">¡Gracias por tu compra!</p>
-      <p class="purchase-subtitle roboto-content-text">Tu pedido ha sido procesado con éxito y estás viendo el detalle completo de tu orden.
+      <p class="purchase-subtitle roboto-content-text">Tu pedido ha sido procesado con éxito y estás viendo el detalle
+        completo de tu orden.
         Nos alegra que formes parte de nuestra comunidad. ¡Esperamos que disfrutes tu experiencia!
       </p>
+
       <article class="purchase-article">
-        <p class="purchase-data-text id-purchase">Orden de compar Nº 000020045</p>
-        <p class="purchase-data-text purchase-date">Fecha: 20/10/2025, 12:00:23</p>
-        <p class="purchase-data-text purchase-item">Articulo: LLavero space hub galaxia</p>
-        <p class="purchase-data-text purchase-unit-price">Precio unitario: $12.00</p>
-        <p class="purchase-data-text purchase-quantity">Cantidad: 1</p>
-        <p class="purchase-subtotal purchase-subtotal">Subtotal: $12.00</p>
-        <p class="purchase-date purchase-total">Total: $12.00</p>
+        <p class="purchase-data-text purchase-data-title">Orden de compra</p>
+        <div class="purchase-data-text-div">
+          <p class="purchase-data-text" id="id-purchase"></p>
+          <p class="purchase-data-text" id="purchase-date"></p>
+        </div>
+        <div class="purchase-data-buss-div">
+          <p class="purchase-data-text" id="purchase-provider"></p>
+          <p class="purchase-data-text" id="purchase-customer"></p>
+        </div>
+        <section class="purchase-item-data-section"></section>
+
+        <p class="purchase-date purchase-total"></p>
       </article>
-      <p class="purchase-suggestions">Puedes consultar el historial completo de tus órdenes de compra desde tu perfil en cualquier momento.
-        Si necesitas hacer un reclamo o tienes alguna duda, te recomendamos contactarnos a través de los canales indicados en la sección de ayuda. ¡Estamos para ayudarte!
+      <p class="purchase-suggestions">Puedes consultar el historial completo de tus órdenes de compra desde tu perfil en
+        cualquier momento.
+        Si necesitas hacer un reclamo o tienes alguna duda, te recomendamos contactarnos a través de los canales
+        indicados en la sección de ayuda. ¡Estamos para ayudarte!
       </p>
     </section>
   </section>
