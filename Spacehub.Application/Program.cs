@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Spacehub.Application.Repository;
+// using SpaceHub.Application.Controllers.Hubs;
 using SpaceHub.Application.Data;
+using SpaceHub.Application.Hubs;
 using SpaceHub.Application.Repository;
 using Stripe;
 
@@ -13,6 +15,7 @@ string? stringConnection = builder.Configuration.GetConnectionString("DefaultCon
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSignalR();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 .AddCookie(options =>
 {
@@ -76,5 +79,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapHub<NotifyHub>("/api/posts");
 
 app.Run();

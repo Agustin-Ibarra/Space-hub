@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SpaceHub.Application.Data;
 using SpaceHub.Application.Dtos;
+using SpaceHub.Application.Models;
 
 namespace SpaceHub.Application.Repository;
 
@@ -9,6 +10,7 @@ public interface IpostRepository
   Task<List<PostDto>> GetPostsList(int offset);
   Task<PostDetailDto?> GetPostDetail(int idPost);
   Task<List<PostDto>> GetPostsSuggestion(int idPost);
+  Task CreatePost(Post post);
 }
 
 public class PostRepository : IpostRepository
@@ -54,7 +56,7 @@ public class PostRepository : IpostRepository
     })
     .FirstOrDefaultAsync();
   }
-  
+
   public async Task<List<PostDto>> GetPostsSuggestion(int idPost)
   {
     return await _appDbContext.Posts
@@ -71,5 +73,11 @@ public class PostRepository : IpostRepository
     })
     .Take(3)
     .ToListAsync();
+  }
+
+  public async Task CreatePost(Post post)
+  {
+    _appDbContext.Posts.Add(post);
+    await _appDbContext.SaveChangesAsync();
   }
 }

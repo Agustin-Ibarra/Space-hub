@@ -27,8 +27,10 @@ public class RegisterDto
 public class LoginDto
 {
   [Required(ErrorMessage = "El nombre de usuario es requerido")]
+  [RegularExpression(@"^[a-zA-Z\w]+$", ErrorMessage = "El nombre de usuario solo admite letras y espacios en blanco")]
   public required string Username { get; set; }
   [Required(ErrorMessage = "La contraseña es requerida")]
+  [RegularExpression(@"^[a-zA-Z0-1]+$", ErrorMessage = "La contraseña solo admite letras y numeros")]
   public required string Password { get; set; }
 }
 
