@@ -83,4 +83,4 @@ $body.addEventListener("click", (e) => {
         $miniSpinner.classList.add("hidden");
       });
   }
-})
+});

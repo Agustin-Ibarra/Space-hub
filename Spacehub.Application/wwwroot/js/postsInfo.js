@@ -1,4 +1,5 @@
 const $body = document.querySelector("body");
+const $dialog = document.querySelector(".notify-div");
 
 fetch(`/api/posts/info/${sessionStorage.getItem("id")}`)
 .then(async(response)=>{
@@ -61,3 +62,20 @@ $body.addEventListener("click",(e)=>{
     sessionStorage.setItem("id",e.target.id);
   }
 })
+
+const connection = new signalR.HubConnectionBuilder()
+  .withUrl("/api/posts")
+  .build();
+
+connection.on("ReceiveNotification", (message) => {
+  $dialog.classList.add("show");
+    setTimeout(() => {
+      $dialog.classList.remove("show");
+    }, 5000);
+});
+
+connection.start()
+.then(()=>{
+  console.log("conexion exitosa")
+})
+.catch(error => console.error(error));
