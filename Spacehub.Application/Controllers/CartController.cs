@@ -35,22 +35,15 @@ public class CartController : Controller
     }
     else
     {
-      try
+      var cart = new Cart
       {
-        var cart = new Cart
-        {
-          id_item = item.IdItem,
-          quantity = item.Quantity,
-          id_user = Convert.ToInt16(User.FindFirstValue(ClaimTypes.NameIdentifier))
-        };
-        await _cartRepository.AddItemToCart(cart);
+        id_item = item.IdItem,
+        quantity = item.Quantity,
+        id_user = Convert.ToInt16(User.FindFirstValue(ClaimTypes.NameIdentifier))
+      };
+      await _cartRepository.AddItemToCart(cart);
 
-        return Created("/cart", new { message = "Articulo agregado al carrito" });
-      }
-      catch (Exception)
-      {
-        return StatusCode(503, new { error = "Ocurrio un error en la base de datos" });
-      }
+      return Created("/cart", new { message = "Articulo agregado al carrito" });
     }
   }
 
@@ -59,22 +52,15 @@ public class CartController : Controller
   [Route("/api/cart")]
   public async Task<IActionResult> ApiCartItems()
   {
-    try
+    int idUser = Convert.ToInt16(User.FindFirstValue(ClaimTypes.NameIdentifier));
+    var CartiItems = await _cartRepository.GetCartItems(idUser);
+    if (CartiItems.Count > 0)
     {
-      int idUser = Convert.ToInt16(User.FindFirstValue(ClaimTypes.NameIdentifier));
-      var CartiItems = await _cartRepository.GetCartItems(idUser);
-      if (CartiItems.Count > 0)
-      {
-        return Ok(CartiItems);
-      }
-      else
-      {
-        return NotFound(new { errorMessage = "No se encontro resultados para este usuario" });
-      }
+      return Ok(CartiItems);
     }
-    catch (Exception)
+    else
     {
-      return StatusCode(503, new { error = "Ocurrio un error en la base de datos" });
+      return NotFound(new { errorMessage = "No se encontro resultados para este usuario" });
     }
   }
 
@@ -90,14 +76,7 @@ public class CartController : Controller
       id_item = cartDto.IdCart,
       quantity = cartDto.Quantity
     };
-    try
-    {
-      await _cartRepository.DeleteItemToCart(cart);
-      return NoContent();
-    }
-    catch (Exception)
-    {
-      return StatusCode(503, new { error = "Ocurrio un error en la base de datos" });
-    }
+    await _cartRepository.DeleteItemToCart(cart);
+    return NoContent();
   }
 }

@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Spacehub.Application.Repository;
 // using SpaceHub.Application.Controllers.Hubs;
@@ -16,6 +18,7 @@ string? stringConnection = builder.Configuration.GetConnectionString("DefaultCon
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();
+builder.Logging.AddFilter("Microsoft.EntityFrameworkCore", LogLevel.None);
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 .AddCookie(options =>
 {
@@ -71,10 +74,27 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthorization();
+app.UseExceptionHandler(error => // middleware para interceptar los errores no controlados de los controladores
+{
+  error.Run(async context =>
+  {
+    var exceptionHandler = context.Features.Get<IExceptionHandlerPathFeature>(); // obtener la interfaz que contiene detalles del error
+    var TypeException = exceptionHandler?.Error;
+    
+    if (TypeException is SqlException)
+    {
+      context.Response.StatusCode = 503;
+      await context.Response.WriteAsJsonAsync(new {error = "Ocurrio un error en la base de datos"});
+    }
+    else
+    {
+      context.Response.StatusCode = 500;
+      await Task.CompletedTask;
+    }
+  });
+});
 
 app.MapControllerRoute(
     name: "default",

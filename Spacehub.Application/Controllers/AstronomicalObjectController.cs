@@ -30,29 +30,22 @@ public class AstronomicalObjectController : Controller
   [Route("/api/astronomical_objects/{offset}")]
   public async Task<IActionResult> ApiAstronomicalObject(int offset)
   {
-    try
-    {
-      var astronomicalObjects = await _IAstronomicalObjectRepository.GetAstronomicalObjectList(offset);
-      return Ok(astronomicalObjects);
-    }
-    catch (Exception)
-    {
-      return StatusCode(503, new { error = "Ocurrio un error en la base de datos"});
-    }
+    var astronomicalObjects = await _IAstronomicalObjectRepository.GetAstronomicalObjectList(offset);
+    return Ok(astronomicalObjects);
   }
 
   [HttpGet]
   [Route("/api/astronomical_objects/info/{idObject}")]
   public async Task<IActionResult> ApiAstronomicalObjectDeatil(int idObject)
   {
-    try
+    var astronomicalObject = await _IAstronomicalObjectRepository.GetAstronomicalObject(idObject);
+    if (astronomicalObject != null)
     {
-      var astronomicalObject = await _IAstronomicalObjectRepository.GetAstronomicalObject(idObject);
       return Ok(astronomicalObject);
     }
-    catch (Exception)
+    else
     {
-      return StatusCode(503, new { error = "Ocurrio un error en la base de datos"});
+      return NotFound(new { error = $"No se encontro el objeto astronomico con id: {idObject}" });
     }
   }
 
@@ -60,14 +53,7 @@ public class AstronomicalObjectController : Controller
   [Route("/api/astronomical_objects/suggestion/{id}")]
   public async Task<IActionResult> ApiAstronomicalObjectsSuggestion(int id)
   {
-    try
-    {
-      var astronomicalObjest = await _IAstronomicalObjectRepository.GetAstronomicalObjectSuggestion(id);
-      return Ok(astronomicalObjest);
-    }
-    catch (Exception)
-    {
-      return StatusCode(503, new { error = "Ocurrio un error en la base de datos" });
-    }
+    var astronomicalObjest = await _IAstronomicalObjectRepository.GetAstronomicalObjectSuggestion(id);
+    return Ok(astronomicalObjest);
   }
 }

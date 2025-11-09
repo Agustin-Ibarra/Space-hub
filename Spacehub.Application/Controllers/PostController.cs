@@ -38,30 +38,22 @@ public class PostController : Controller
 	[Route("/api/posts/{offset}")]
 	public async Task<IActionResult> ApiPosts(int offset)
 	{
-		Console.WriteLine(offset);
-		try
-		{
-			var posts = await _postRepository.GetPostsList(offset);
-			return Ok(posts);
-		}
-		catch (Exception)
-		{
-			return StatusCode(503, new { error = "Ocurrio un error en la base de datos" });
-		}
+		var posts = await _postRepository.GetPostsList(offset);
+		return Ok(posts);
 	}
 
 	[HttpGet]
 	[Route("/api/posts/info/{idPost}")]
 	public async Task<IActionResult> ApiPostDetail(int idPost)
 	{
-		try
+		var post = await _postRepository.GetPostDetail(idPost);
+		if (post != null)
 		{
-			var posts = await _postRepository.GetPostDetail(idPost);
-			return Ok(posts);
+			return Ok(post);
 		}
-		catch (Exception)
+		else
 		{
-			return StatusCode(503, new { error = "Ocurrio un error en la base de datos" });
+			return NotFound(new { error = $"No se encontro la publicacion con id: {idPost}" });
 		}
 	}
 
@@ -69,15 +61,8 @@ public class PostController : Controller
 	[Route("/api/posts/info/suggestion/{idPost}")]
 	public async Task<IActionResult> ApiPostSuggestion(int idPost)
 	{
-		try
-		{
-			var suggestion = await _postRepository.GetPostsSuggestion(idPost);
-			return Ok(suggestion);
-		}
-		catch (Exception)
-		{
-			return StatusCode(503, new { error = "Ocurrio un error en la base de datos" });
-		}
+		var suggestion = await _postRepository.GetPostsSuggestion(idPost);
+		return Ok(suggestion);
 	}
 
 	[Authorize]
@@ -86,7 +71,7 @@ public class PostController : Controller
 	public async Task<IActionResult> ApiCreatePost([FromBody] PostDataDto postData)
 	{
 		var role = User.FindFirstValue(ClaimTypes.Role);
-		if (role == "editor")
+		if (role == "editor") // validar que solo los usuarios con perfil editor puedan crear un post
 		{
 			if (!ModelState.IsValid)
 			{
@@ -106,9 +91,8 @@ public class PostController : Controller
 				};
 
 				await _postRepository.CreatePost(post);
-
+				// al crear el post se envia una notificacion a los usuarios conectados en el hub
 				await _hubContext.Clients.All.SendAsync("ReceiveNotification", "Se publico un nuevo posts");
-
 				return Created("/posts", postData);
 			}
 		}
