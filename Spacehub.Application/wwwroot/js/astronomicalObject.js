@@ -15,6 +15,7 @@ const generateObjects = function () {
         const $title = document.createElement("p");
         const $category = document.createElement("p");
         const $link = document.createElement("a");
+        const $span = document.createElement("span");
         $astronomicalObjectList.appendChild($li);
         $li.setAttribute("class", "content-list-item");
         $imageDiv.setAttribute("class", "content-list-item-img-div");
@@ -35,7 +36,11 @@ const generateObjects = function () {
         $image.setAttribute("src", astronomicalObject.imagePath);
         $title.textContent = astronomicalObject.title;
         $link.textContent = "Ver articulo completo";
-        $category.textContent = `Categoria: ${astronomicalObject.category}`
+        $link.appendChild($span);
+        $span.setAttribute("class","material-symbols-outlined");
+        $span.textContent = "arrow_forward";
+        $category.textContent = `Categoria: ${astronomicalObject.category}`;
+
       })
       offset += 10;
     }

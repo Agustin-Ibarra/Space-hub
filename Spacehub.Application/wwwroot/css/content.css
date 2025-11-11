@@ -8,9 +8,15 @@ header {
   margin: 3rem;
 }
 
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .content-container {
   width: 1200px;
-  min-height: 60vh;
   background-color: #ffffff;
   border-radius: 10px;
 }
@@ -132,6 +138,15 @@ h3 {
   border-radius: 10px;
   width: max-content;
   transition: all .4s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.item-link .material-symbols-outlined{
+  color: #ffffff;
+  font-size: 20px;
 }
 
 .item-link:hover {
@@ -151,20 +166,20 @@ h3 {
 }
 
 .item-detail-container {
+  margin: auto;
   display: flex;
   justify-content: center;
   margin: 3rem 2rem;
   align-items: center;
-  justify-content: space-around;
+  gap: 2rem;
+  /* background-color: #f0f0f0; */
 }
 
 .item-detail-img-div {
-  width: 400px;
-  height: 400px;
+  width: 350px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f0f0f0;
 }
 
 .item-detail-img-div img {
@@ -172,7 +187,7 @@ h3 {
 }
 
 .item-detail-data-container {
-  width: 600px;
+  width: 60%;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -339,7 +354,7 @@ dialog[open] {
 
 .item-detail-add-cart-btn .material-symbols-outlined {
   color: #ffffff;
-  font-size: 22px;
+  font-size: 20px;
 }
 
 .item-detail-add-cart-btn:hover {
@@ -506,11 +521,7 @@ dialog[open] {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  height: 526px;
   background-color: #f0f0f0;
-  background: linear-gradient(90deg, #f0f0f0, #dfdfdf, #f0f0f0);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
 }
 
 @keyframes shimmer {
@@ -525,7 +536,7 @@ dialog[open] {
 
 .object-info-img-div img {
   width: 100%;
-  height: 526px;
+  /* height: 526px; */
 }
 
 .category {

@@ -14,6 +14,7 @@ const generateItems = function (posts) {
     const $title = document.createElement("p");
     const $category = document.createElement("p");
     const $link = document.createElement("a");
+    const $icon = document.createElement("span");
     $list.appendChild($li);
     $li.appendChild($imageDiv);
     $li.appendChild($divText);
@@ -34,6 +35,9 @@ const generateItems = function (posts) {
     $link.setAttribute("id", post.id);
     $link.setAttribute("href", "/posts/info");
     $link.textContent = "Ver notitcia completa";
+    $link.appendChild($icon);
+    $icon.setAttribute("class","material-symbols-outlined");
+    $icon.textContent = "arrow_forward";
   });
 }
 

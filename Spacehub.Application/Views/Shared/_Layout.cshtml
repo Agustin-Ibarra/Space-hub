@@ -50,6 +50,9 @@
       </nav>
     </div>
   </header>
+  <section class="load-section">
+    <div></div>
+  </section>
   <div class="container">
     <main role="main" class="pb-3">
       @RenderBody()
@@ -63,5 +66,5 @@
   </footer>
   @await RenderSectionAsync("Scripts", required: false)
 </body>
-
+<script src="~/js/script.js"></script>
 </html>

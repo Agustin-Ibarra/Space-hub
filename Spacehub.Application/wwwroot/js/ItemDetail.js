@@ -5,7 +5,8 @@ const $itemDescription = document.querySelector(".item-detail-description");
 const $itemPrice = document.querySelector(".item-detail-price");
 const $itemStock = document.querySelector(".item-detail-stock");
 const $stock = document.querySelector(".item-detail-options-quantity");
-const $imageSpinner = document.querySelector(".medium-spinner");
+const $loadSection = document.querySelector(".loader-section-container");
+const $main = document.querySelector(".main");
 let quantity = 1;
 
 fetch(`/api/items/detail/${sessionStorage.getItem("idItem")}`)
@@ -18,7 +19,10 @@ fetch(`/api/items/detail/${sessionStorage.getItem("idItem")}`)
     $itemName.textContent = item.itemName;
     $itemPrice.textContent = `$ ${Number(item.itemUnitPrice).toFixed(2)}`;
     $itemStock.textContent = `Stock disponible: ${item.itemstock}`;
-    $imageSpinner.classList.add("hidden");
+    // $main.removeChild($loadSection);
+    // $loadSection.classList.add("hidden");
+    // console.log("element",$loadSection);
+    // $
   }
 })
 .catch((error)=>{
@@ -39,6 +43,7 @@ $body.addEventListener("click",(e)=>{
     }
   }
   else if(e.target.matches(".item-detail-add-cart-btn") || e.target.matches(".add-cart-icon-btn")){
+    sessionStorage.setItem("redirect","/cart");
     $miniSpinner = document.querySelector(".mini-spinner");
     $addCartIcon = document.querySelector(".add-cart-icon");
     $miniSpinner.classList.remove("hidden");

@@ -13,6 +13,7 @@ const generateItems = function (items) {
     const $title = document.createElement("p");
     const $price = document.createElement("p");
     const $itemLink = document.createElement("a");
+    const $icon = document.createElement("span");
     $list.appendChild($li);
     $li.setAttribute("class", "item");
     $li.appendChild($itemImage);
@@ -31,6 +32,9 @@ const generateItems = function (items) {
     $itemLink.setAttribute("href", "/items/details");
     $itemLink.setAttribute("id", item.idItem);
     $itemLink.textContent = "Ver articulo";
+    $itemLink.appendChild($icon);
+    $icon.setAttribute("class","material-symbols-outlined");
+    $icon.textContent = "arrow_forward";
   });
 }
 
