@@ -65,40 +65,32 @@ public class PostController : Controller
 		return Ok(suggestion);
 	}
 
-	[Authorize]
+	[Authorize(Roles = "editor")]
 	[HttpPost]
 	[Route("/api/posts")]
 	public async Task<IActionResult> ApiCreatePost([FromBody] PostDataDto postData)
 	{
-		var role = User.FindFirstValue(ClaimTypes.Role);
-		if (role == "editor") // validar que solo los usuarios con perfil editor puedan crear un post
+		if (!ModelState.IsValid)
 		{
-			if (!ModelState.IsValid)
-			{
-				var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
-				return BadRequest(new { error = errors });
-			}
-			else
-			{
-				var post = new Post
-				{
-					path_image = postData.ImagePath,
-					post_description = postData.PostDescription,
-					text_content = postData.TextContent,
-					title = postData.Title,
-					id_category = postData.IdCategory,
-					created_at = DateTime.Now
-				};
-
-				await _postRepository.CreatePost(post);
-				// al crear el post se envia una notificacion a los usuarios conectados en el hub
-				await _hubContext.Clients.All.SendAsync("ReceiveNotification", "Se publico un nuevo posts");
-				return Created("/posts", postData);
-			}
+			var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
+			return BadRequest(new { error = errors });
 		}
 		else
 		{
-			return Unauthorized();
+			var post = new Post
+			{
+				path_image = postData.ImagePath,
+				post_description = postData.PostDescription,
+				text_content = postData.TextContent,
+				title = postData.Title,
+				id_category = postData.IdCategory,
+				created_at = DateTime.Now
+			};
+
+			await _postRepository.CreatePost(post);
+			// al crear el post se envia una notificacion a los usuarios conectados en el hub
+			await _hubContext.Clients.All.SendAsync("ReceiveNotification", "Se publico un nuevo posts");
+			return Created("/posts", postData);
 		}
 	}
 }
