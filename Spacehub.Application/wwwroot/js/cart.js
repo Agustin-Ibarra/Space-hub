@@ -72,6 +72,22 @@ fetch("/api/cart")
         $subtotalResumen.textContent = `Subtotal: $${Number(subtotal).toFixed(2)}`;
         $quantityResumen.textContent = `Articulos: ${quantity}`;
       });
+      if(sessionStorage.getItem("reserveItem") === "true"){
+        console.log("restore items");
+        fetch("/api/items/restore",{
+          method:"PATCH",
+          headers:{"Content-Type":"application/json"},
+          body:JSON.stringify({itemsList:itemsList})
+        })
+        .then((response)=>{
+          if(response.status === 204){
+            sessionStorage.removeItem("reserveItem");
+          }
+        })
+        .catch((error)=>{
+          console.error(error);
+        });
+      }
     }
     else if (response.status === 404) {
       $emptyCart.classList.remove("hidden");
@@ -113,22 +129,39 @@ $body.addEventListener("click", (e) => {
   else if (e.target.matches(".cart-pay-btn")) {
     e.target.childNodes[1].classList.add("hidden");
     e.target.childNodes[3].classList.remove("hidden");
-    fetch("/api/payment", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ itemsList: cartList })
+    fetch("/api/items",{
+      method:"PATCH",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({itemsList:itemsList})
     })
-      .then(async (response) => {
-        const session = await response.json();
-        console.log(session);
-        await stripe.redirectToCheckout({ sessionId: session.idSession });
-      })
-      .catch((error) => {
-        console.error("Error al iniciar el pago:", error);
-      })
-      .finally(() => {
-        e.target.childNodes[1].classList.remove("hidden");
-        e.target.childNodes[3].classList.add("hidden");
-      });
+    .then(async(response)=>{
+      if(response.status === 204){
+        console.log("reserve  items");
+        sessionStorage.setItem("reserveItem","true");
+        fetch("/api/payment", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ itemsList: cartList })
+        })
+          .then(async (response) => {
+            const session = await response.json();
+            await stripe.redirectToCheckout({ sessionId: session.idSession });
+          })
+          .catch((error) => {
+            console.error("Error al iniciar el pago:", error);
+          })
+          .finally(() => {
+            e.target.childNodes[1].classList.remove("hidden");
+            e.target.childNodes[3].classList.add("hidden");
+          });
+      }
+      else if(response.status >= 400){
+        const error = await response.json();
+        console.error(error);
+      }
+    })
+    .catch((error)=>{
+      console.log(error);
+    })
   }
 });

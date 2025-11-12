@@ -68,3 +68,5 @@ fetch("/api/cart")
 .catch((error)=>{
   console.error(error);
 })
+
+sessionStorage.removeItem("reserveItem");
