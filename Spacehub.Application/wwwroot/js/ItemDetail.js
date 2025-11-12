@@ -19,10 +19,6 @@ fetch(`/api/items/detail/${sessionStorage.getItem("idItem")}`)
     $itemName.textContent = item.itemName;
     $itemPrice.textContent = `$ ${Number(item.itemUnitPrice).toFixed(2)}`;
     $itemStock.textContent = `Stock disponible: ${item.itemstock}`;
-    // $main.removeChild($loadSection);
-    // $loadSection.classList.add("hidden");
-    // console.log("element",$loadSection);
-    // $
   }
 })
 .catch((error)=>{

@@ -90,7 +90,7 @@ public class ItemController : Controller
       if (ItemsRejected.Count == 0)
       {
         // si la lista esta vacia indica que no ocurrieron errores al actualizar stock
-        return Ok(new { message = "Articulos reservados" });
+        return Created();
       }
       else
       {
@@ -110,6 +110,26 @@ public class ItemController : Controller
           itemsRejected = ItemsRejected
         });
       }
+    }
+  }
+
+  [Authorize]
+  [HttpPatch]
+  [Route("/api/items/restore")]
+  public async Task<IActionResult> ApiRestoreItem([FromBody] ItemsListDto itemsList)
+  {
+    if (!ModelState.IsValid)
+    {
+      var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
+      return BadRequest(new { error = errors });
+    }
+    else
+    {
+      foreach (var items in itemsList.ItemsList)
+      {
+        await _itemRepository.RestoreStock(items.IdItem, items.Quantity);
+      }
+      return NoContent();
     }
   }
 }
