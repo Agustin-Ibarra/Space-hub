@@ -6,7 +6,6 @@ using Spacehub.Application.Repository;
 using SpaceHub.Application.Data;
 using SpaceHub.Application.Hubs;
 using SpaceHub.Application.Repository;
-using DotNetEnv;
 using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
