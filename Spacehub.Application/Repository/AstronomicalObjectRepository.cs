@@ -54,8 +54,7 @@ public class AstronomicalObjectRepository : IAstronomicalObjectRepository
   public async Task<List<AstronomicalObjectDto>> GetAstronomicalObjectSuggestion(int idObject)
   {
     return await _AppDbContext.AstronomicalObjects
-    .OrderBy(astronomical => astronomical.id_object)
-    .OrderDescending()
+    .OrderByDescending(astronomical => astronomical.id_object) // orden descendente para obtener las sugereicias mas recientes
     .Include(astronomical => astronomical.CategoryFk)
     .Where(astronomical => astronomical.id_object != idObject)
     .Select(astronomical => new AstronomicalObjectDto

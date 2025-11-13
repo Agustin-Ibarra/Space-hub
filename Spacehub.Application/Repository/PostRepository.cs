@@ -23,8 +23,7 @@ public class PostRepository : IpostRepository
   public async Task<List<PostDto>> GetPostsList(int offset)
   {
     return await _appDbContext.Posts
-    .OrderBy(post => post.id_post)
-    .OrderDescending()
+    .OrderByDescending(post => post.id_post) // orden descendente para obtener los post mas recientes
     .Include(post => post.CategoryFk)
     .Select(post => new PostDto
     {
@@ -60,8 +59,7 @@ public class PostRepository : IpostRepository
   public async Task<List<PostDto>> GetPostsSuggestion(int idPost)
   {
     return await _appDbContext.Posts
-    .OrderBy(post => post.id_post)
-    .OrderDescending()
+    .OrderByDescending(post => post.id_post) // orden descendente para obtener las sugereicias mas recientes
     .Include(post => post.CategoryFk)
     .Where(post => post.id_post != idPost)
     .Select(post => new PostDto
