@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Spacehub.Application.Repository;
 using SpaceHub.Application.Data;
 using SpaceHub.Application.Hubs;
+using SpaceHub.Application.Logs;
 using SpaceHub.Application.Repository;
 using Stripe;
 
@@ -75,6 +76,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
+app.UseMiddleware<RequestLoggin>();
 app.UseExceptionHandler(error => // middleware para interceptar los errores no controlados de los controladores
 {
   error.Run(async context =>
