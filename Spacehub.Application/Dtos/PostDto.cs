@@ -33,12 +33,12 @@ public class PostDataDto
 
   [Required(ErrorMessage = "La descripcion es requerida")]
   [StringLength(maximumLength: 250, MinimumLength = 10, ErrorMessage = "La descripcion no puede ser menor a 10 caracteres y mayor a 250 caracteres")]
-  [RegularExpression(@"^[A-Za-zÁÉÍÓÚáéíóúÜüÑñ0-9\-\/.,():\s]+$", ErrorMessage = "La descripcion no admite caracteres especiales")]
+  [RegularExpression(@"^[A-Za-zÁÉÍÓÚáéíóúÜüÑñ0-9\-—\/.,():'‘’“”\s\r\n]+$", ErrorMessage = "La descripcion no admite caracteres especiales")]
   public required string PostDescription { get; set; }
 
   [Required(ErrorMessage = "El texto es requerido")]
   [StringLength(maximumLength: 2500, MinimumLength = 100, ErrorMessage = "El texto no puede ser menor a 100 caracteres y mayor a 2500 caracteres")]
-  [RegularExpression(@"^[A-Za-zÁÉÍÓÚáéíóúÜüÑñ0-9\-\/.,():\s]+$", ErrorMessage = "El texto no admite caracteres especiales")]
+  [RegularExpression(@"^[A-Za-zÁÉÍÓÚáéíóúÜüÑñ0-9\-—\/.,():'‘’“”\s\r\n]+$", ErrorMessage = "El texto no admite caracteres especiales")]
   public required string TextContent { get; set; }
 
   [Required(ErrorMessage = "La ruta de imagen es requerida")]

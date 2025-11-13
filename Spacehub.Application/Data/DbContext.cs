@@ -33,23 +33,4 @@ public class AppDbContext : DbContext
     modelBuilder.Entity<Post>().ToTable("posts");
     modelBuilder.Entity<AstronomicalObject>().ToTable("astronomical_objects");
   }
-
-  // public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default){
-  //   Console.WriteLine($"start {DateTime.Now}");
-  //   var changes = ChangeTracker
-  //   .Entries()
-  //   .Where(entity => entity.State == EntityState.Added || entity.State == EntityState.Modified)
-  //   .ToList();
-  //   var result = await base.SaveChangesAsync(cancellationToken);
-  //   if (changes.Count != 0)
-  //   {
-  //     Console.WriteLine("update");
-  //     await _hubContext.Clients.All.SendAsync("ReceiveNotification", "Se publico un nuevo posts");
-  //   }
-  //   else
-  //   {
-  //     Console.WriteLine("not update");
-  //   }
-  //   return result;
-  // }
 }

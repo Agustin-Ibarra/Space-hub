@@ -5,3 +5,4 @@ lib/
 launchSettings.json
 diagram.txt
 appsettings.Development.json
+.env

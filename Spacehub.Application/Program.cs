@@ -3,17 +3,18 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Spacehub.Application.Repository;
-// using SpaceHub.Application.Controllers.Hubs;
 using SpaceHub.Application.Data;
 using SpaceHub.Application.Hubs;
 using SpaceHub.Application.Repository;
+using DotNetEnv;
 using Stripe;
 
+Env.Load(); // cargar archivo con las varaibles de entorno
+
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
 
-StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
-
-string? stringConnection = builder.Configuration.GetConnectionString("DefaultConnection");
+StripeConfiguration.ApiKey = Environment.GetEnvironmentVariable("STRIPE_SECRET_KEY");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -46,15 +47,16 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 });
 
 
-if (stringConnection != null)
+if (connectionString != null)
 {
-  builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(stringConnection));
+  builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
   builder.Services.AddScoped<IUserRepository, UserRepository>();
   builder.Services.AddScoped<IAstronomicalObjectRepository, AstronomicalObjectRepository>();
   builder.Services.AddScoped<IpostRepository, PostRepository>();
   builder.Services.AddScoped<IItemRespotory, ItemRepository>();
   builder.Services.AddScoped<ICartRepository, CartRepository>();
   builder.Services.AddScoped<IPurchaseRepository, PurchaseRepository>();
+  builder.Services.AddScoped<IChatRepository, ChatRepository>();
 }
 else
 {
