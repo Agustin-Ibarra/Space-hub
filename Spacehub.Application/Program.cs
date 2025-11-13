@@ -9,12 +9,10 @@ using SpaceHub.Application.Repository;
 using DotNetEnv;
 using Stripe;
 
-Env.Load(); // cargar archivo con las varaibles de entorno
-
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-StripeConfiguration.ApiKey = Environment.GetEnvironmentVariable("STRIPE_SECRET_KEY");
+StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
