@@ -77,7 +77,7 @@ App/
 ### Panel principal
 <img src="Spacehub.Application/wwwroot/images/examples/Captura de pantalla (641).png" alt="shop UI" width="600"/>
 
-### Objetos astronomicos
+### Objetos astronómicos
 <img src="Spacehub.Application/wwwroot/images/examples/Captura de pantalla (642).png" alt="Item UI" width="600"/>
 
 ### Noticias espaciales
@@ -86,7 +86,7 @@ App/
 ### Tienda espacial
 <img src="Spacehub.Application/wwwroot/images/examples/Captura de pantalla (644).png" alt="Account UI" width="600"/>
 
-### Chat bot
+### Chat bot con IA generativa de texto
 <img src="Spacehub.Application/wwwroot/images/examples/Captura de pantalla (645).png" alt="Account UI" width="600"/>
 
 ## Inicio
