@@ -651,8 +651,8 @@ aside {
   gap: 2rem;
   border-radius: 10px;
   padding: 2rem;
-  width: 70%;
-  min-height: 50vh;
+  width: 800px;
+  min-height: 60vh;
   justify-content: space-between;
   background-color: #ffffff1c;
 }
