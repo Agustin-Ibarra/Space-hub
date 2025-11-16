@@ -46,7 +46,7 @@ La percistencia de informacion se realiza a traves de una base de datos relacion
 - Gestor de base de datos: SQL Server
 ## Documentacion
 - Documentación de APIs: la documentación de los endpoint y APIs esta creada con Swagger Open.io
-- Enlace: documentación disponible en [docs](http://localhost:5179/documentation)
+- Enlace: documentación disponible en [docs](/swagger)
 ## Pruebas unitarias
 - Librerias: las pruebas unitarias estan creadas con la libreria de Xunit y Mock
 ```

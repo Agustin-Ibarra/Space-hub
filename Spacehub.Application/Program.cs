@@ -17,6 +17,7 @@ StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();
+builder.Services.AddSwaggerGen();
 builder.Logging.AddFilter("Microsoft.EntityFrameworkCore", LogLevel.None);
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 .AddCookie(options =>
@@ -76,6 +77,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseMiddleware<RequestLoggin>();
 app.UseExceptionHandler(error => // middleware para interceptar los errores no controlados de los controladores
 {
