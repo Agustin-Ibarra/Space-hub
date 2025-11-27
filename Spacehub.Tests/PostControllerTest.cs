@@ -28,9 +28,11 @@ public class PostControllerTest
     postList.Add(post);
     var hubContextMock = new Mock<IHubContext<NotifyHub>>();
     var postRepositoryMock = new Mock<IpostRepository>();
+    
     postRepositoryMock
     .Setup(post => post.GetPostsList(0))
     .ReturnsAsync(postList);
+
     var postController = new PostController(postRepositoryMock.Object, hubContextMock.Object);
 
     // Act
