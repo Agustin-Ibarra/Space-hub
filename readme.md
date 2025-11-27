@@ -52,8 +52,7 @@ La percistencia de informacion se realiza a traves de una base de datos relacion
 ```
 Tests/
 │
-├── CartControllerTests.cs   # test del controlador que de procesa las peticiones del carrito de compras
-├── ShopControllerTasts.cs   # test del controlador que porecesa las solicitudes de la seccion shop
+├── PostControllerTests.cs   # test del controlador que de procesa los posts
 ```
 - Iniciar test: con el siguiente comando ejecuta las pruebas unitarias
 ```bash
