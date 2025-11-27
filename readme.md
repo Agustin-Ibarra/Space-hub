@@ -52,8 +52,9 @@ La percistencia de informacion se realiza a traves de una base de datos relacion
 ```
 Tests/
 │
-├── PostControllerTests.cs   # test del controlador que de procesa los posts
-├── AstronomicalObjectTest.cs   # test del controlador que obtiene informacion de los objetos astronomicos
+├── AstronomicalObjectControllerTests.cs   # test del controlador que obtiene informacion de los objetos astronomicos
+├── CartControllerTests.cs                 # test del controlador que retorna o agrega articulos del carrito de compras
+├── PostControllerTests.cs                 # test del controlador que de procesa las peticiones de la seccion posts
 ```
 - Iniciar test: con el siguiente comando ejecuta las pruebas unitarias
 ```bash
@@ -66,7 +67,7 @@ dotnet test
 ```
 App/
 |── Views/
-|   └── views/ # archivos de vistas Razor Pages
+|   └── views/   # archivos de vistas Razor Pages
 |── wwwroot/
 |   ├── css/     # archivos de estilos
 |   ├── images/  # Carpetas de imagenes para recursos graficos

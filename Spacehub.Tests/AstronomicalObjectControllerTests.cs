@@ -9,7 +9,7 @@ namespace Spacehub.Tests;
 public class AstronomicalObjectCotnrollerTest
 {
   [Fact]
-  public async Task GetAstronomicalObejcts_retunrOk()
+  public async Task GetAstronomicalObejcts_returnsOk()
   {
     // Averrage
     List<AstronomicalObjectDto> objectsLists = [];
@@ -33,13 +33,14 @@ public class AstronomicalObjectCotnrollerTest
     var request = await astronomicalObjectController.ApiAstronomicalObject(0);
     var okResult = Assert.IsType<OkObjectResult>(request);
     var retunrObject = Assert.IsType<List<AstronomicalObjectDto>>(okResult.Value);
-
+    
+    // Assert
     Assert.Equal(200, okResult.StatusCode);
     Assert.Equal(objectsLists, retunrObject);
   }
 
   [Fact]
-  public async Task GetSuggestion_retunrOk()
+  public async Task GetSuggestion_retunrsOk()
   {
     // Averrage
     List<AstronomicalObjectDto> suggestionList = [];
@@ -63,6 +64,7 @@ public class AstronomicalObjectCotnrollerTest
     var okResult = Assert.IsType<OkObjectResult>(request);
     var returnObject = Assert.IsType<List<AstronomicalObjectDto>>(okResult.Value);
 
+    // Assert
     Assert.Equal(200, okResult.StatusCode);
     Assert.Equal(suggestionList, returnObject);
   }

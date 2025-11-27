@@ -1,5 +1,4 @@
 using System.Security.Claims;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Moq;
@@ -21,7 +20,6 @@ public class PostControllerTest
     var post = new PostDto
     {
       Category = "Exploraciones espaciales",
-      Id = 1,
       ImagePath = "/images/posts/exploracion_a_marte.png",
       Title = "Space X realizara una exploracion a Marte"
     };
@@ -40,23 +38,22 @@ public class PostControllerTest
     var okResult = Assert.IsType<OkObjectResult>(request);
     var returnObject = Assert.IsType<List<PostDto>>(okResult.Value);
 
+    // Assert
     Assert.Equal(200, okResult.StatusCode);
     Assert.Equal(postList, returnObject);
   }
 
   [Fact]
-  public async Task GetPostDetail_ReturnOk()
+  public async Task GetPostDetail_ReturnsOk()
   {
     // Averrage
     var post = new PostDetailDto
     {
       Category = "Exploraciones espaciales",
-      Id = 1,
       ImagePath = "/images/posts/exploracion_a_marte.png",
       TextContent = "Space X realizara una exploracion a Marte ...",
       TextDescription = "Space X realizara una exploracion a Marte ...",
       Title = "Space X realizara una exploracion a Marte",
-      CreatedAt = DateTime.Now
     };
     var hubContextMock = new Mock<IHubContext<NotifyHub>>();
     var postRepositoryMock = new Mock<IpostRepository>();
@@ -70,12 +67,13 @@ public class PostControllerTest
     var okResult = Assert.IsType<OkObjectResult>(request);
     var returnObject = Assert.IsType<PostDetailDto>(okResult.Value);
 
+    // Assert
     Assert.Equal(200, okResult.StatusCode);
     Assert.Equal(post, returnObject);
   }
 
   [Fact]
-  public async Task CreatePost_ReturnOk()
+  public async Task CreatePost_ReturnsOk()
   {
     var claims = new[]
     {
@@ -132,7 +130,8 @@ public class PostControllerTest
     var request = await postController.ApiCreatePost(postData);
     var okResult = Assert.IsType<CreatedResult>(request);
     var returnObject = Assert.IsType<PostDataDto>(okResult.Value);
-
+    
+    // Assert
     Assert.Equal(201, okResult.StatusCode);
     Assert.Equal(postData, returnObject);
   }
