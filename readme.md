@@ -53,6 +53,7 @@ La percistencia de informacion se realiza a traves de una base de datos relacion
 Tests/
 │
 ├── PostControllerTests.cs   # test del controlador que de procesa los posts
+├── AstronomicalObjectTest.cs   # test del controlador que obtiene informacion de los objetos astronomicos
 ```
 - Iniciar test: con el siguiente comando ejecuta las pruebas unitarias
 ```bash
