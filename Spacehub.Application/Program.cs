@@ -1,7 +1,9 @@
+using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Spacehub.Application.Repository;
 using SpaceHub.Application.Data;
 using SpaceHub.Application.Hubs;
@@ -45,7 +47,6 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
   };
 });
 
-
 if (connectionString != null)
 {
   builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
@@ -61,6 +62,20 @@ else
 {
   throw new Exception("La cedena de conexion es null");
 }
+
+builder.Services.AddRateLimiter(options =>
+{
+  options.AddPolicy("fixedWindows", context => RateLimitPartition.GetFixedWindowLimiter(
+    partitionKey: context.Connection.RemoteIpAddress?.ToString() ?? "unknown ip address",
+    factory: Key => new FixedWindowRateLimiterOptions
+    {
+      PermitLimit = 60,
+      Window = TimeSpan.FromSeconds(60),
+      QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+      QueueLimit = 0
+    }
+  ));
+});
 
 var app = builder.Build();
 
@@ -86,11 +101,11 @@ app.UseExceptionHandler(error => // middleware para interceptar los errores no c
   {
     var exceptionHandler = context.Features.Get<IExceptionHandlerPathFeature>(); // obtener la interfaz que contiene detalles del error
     var TypeException = exceptionHandler?.Error;
-    
+
     if (TypeException is SqlException)
     {
       context.Response.StatusCode = 503;
-      await context.Response.WriteAsJsonAsync(new {error = "Ocurrio un error en la base de datos"});
+      await context.Response.WriteAsJsonAsync(new { error = "Ocurrio un error en la base de datos" });
     }
     else
     {
